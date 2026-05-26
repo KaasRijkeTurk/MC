@@ -30,8 +30,8 @@ function initStrands() {
 }
 
 function resizeCanvas() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   initStrands();
 }
 
@@ -104,32 +104,41 @@ drawDNA();
 /* ============================================
    HAMBURGER / MOBILE NAV
    ============================================ */
-const hamburger = document.querySelector('.hamburger');
-const mobileNav = document.querySelector('.mobile-nav');
-const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+const hamburger   = document.querySelector('.hamburger');
+const mobileNav   = document.querySelector('.mobile-nav');
+const backdrop    = document.querySelector('.mobile-nav__backdrop');
+const navLinks    = document.querySelectorAll('.mobile-nav__panel a');
+
+function openNav() {
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  mobileNav.classList.add('open');
+  mobileNav.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNav() {
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  mobileNav.classList.remove('open');
+  mobileNav.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
 
 if (hamburger && mobileNav) {
   hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.classList.toggle('open');
-    mobileNav.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    hamburger.classList.contains('open') ? closeNav() : openNav();
   });
 
-  mobileNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileNav.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
+  // Sluit bij klikken op een link
+  navLinks.forEach(link => link.addEventListener('click', closeNav));
 
-  // Close on backdrop tap
-  mobileNav.addEventListener('click', (e) => {
-    if (e.target === mobileNav) {
-      hamburger.classList.remove('open');
-      mobileNav.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+  // Sluit bij klikken op backdrop
+  backdrop?.addEventListener('click', closeNav);
+
+  // Sluit met Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeNav();
   });
 }
 
@@ -166,7 +175,7 @@ if (!prefersReduced) {
    ACTIVE NAV LINK
    ============================================ */
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('nav ul a');
+const desktopNavLinks = document.querySelectorAll('nav ul a');
 
 window.addEventListener('scroll', () => {
   let current = '';
@@ -175,9 +184,9 @@ window.addEventListener('scroll', () => {
       current = sec.getAttribute('id');
     }
   });
-  navLinks.forEach(link => {
+  desktopNavLinks.forEach(link => {
     link.style.color = link.getAttribute('href') === `#${current}`
       ? 'var(--accent)'
       : '';
   });
-}, { passive: true }); // passive for scroll performance on mobile
+}, { passive: true });
