@@ -130,22 +130,23 @@ if (hamburger && mobileNav) {
     hamburger.classList.contains('open') ? closeNav() : openNav();
   });
 
-// Sluit bij klikken op een link
-navLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    closeNav();
+  // Sluit bij klikken op een link en scroll soepel
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeNav();
 
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'));
-      const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-      setTimeout(() => {
-        window.scrollTo({ top, behavior: 'smooth' });
-      }, 50);
-    }
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+        setTimeout(() => {
+          window.scrollTo({ top, behavior: 'smooth' });
+        }, 50);
+      }
+    });
   });
-});
+
   // Sluit bij klikken op backdrop
   backdrop?.addEventListener('click', closeNav);
 
@@ -204,6 +205,9 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
+/* ============================================
+   MARQUEE SPEED CALCULATION
+   ============================================ */
 const track = document.querySelector('.marquee-track');
 if (track) {
   const speed = 100;
@@ -212,7 +216,6 @@ if (track) {
   track.style.animationDuration = duration + 's';
   track.style.setProperty('--marquee-end', `-${halfWidth}px`);
 }
-
 /* ============================================
    TAAL TOGGLE
    ============================================ */
@@ -225,30 +228,78 @@ const translations = {
     'panel-01':    '01 / over mij',
     'panel-02':    '02 / skills',
     'panel-03':    '03 / projecten',
-    'over-bio':    '18 jaar. UITLAG KOMT. Ik bouw mods, sites en scripts voor <span class="accent">ervaring</span> en <span class="accent">connecties</span>.',
-    'chip-0': 'De school met de glazen toilet deurtjes.',
-    'chip-1': 'Ik wacht op mn uitlag',
-    'chip-2': 'NL · TR · EN',
+    'panel-04':    "04 / extra's",
+    'over-bio':    '18 jaar. UITSLAG KOMT. Ik bouw mods, sites en scripts voor <span class="accent">ervaring</span> en <span class="accent">connecties</span>.',
+    'chip-0':      'De school met de glazen toilet deurtjes.',
+    'chip-1':      'Ik wacht op mn uitslag',
+    'chip-2':      'NL · TR · EN',
     'proj-desc-0': 'Islamitisch geïnspireerde items & blokken in Minecraft. Leert spelers over de Islam en zijn geschiedenis.',
     'proj-desc-1': 'Nieuwe edelstenen, mobs & structuren. Gems geven unieke abilities via de Smithing Table.',
     'proj-desc-2': 'Bezoek de website astublieft niet.',
     'proj-desc-3': 'Discord AI-bot voor MC serverbeheer via Ollama (llama3.2). Lokaal, geen API-kosten.',
     'status':      'EXAMENS VOORBIJ!',
-    'nav-0': 'over', 'nav-1': 'skills', 'nav-2': 'projecten', 'nav-3': 'contact',
-    'mob-0': 'over', 'mob-1': 'skills', 'mob-2': 'projecten', 'mob-3': 'contact',
+    
+    // Desktop Nav Volgorde
+    'nav-0': 'over', 'nav-1': 'skills', 'nav-2': 'projecten', 'nav-3': 'contact', 'nav-4': "extra's",
+    
+    // Mobiele Nav Volgorde (Gematched met jouw HTML-lijst!)
+    'mob-0': 'over',       // plek 1
+    'mob-1': 'skills',     // plek 2
+    'mob-2': 'projecten',  // plek 3
+    'mob-3': "extra's",    // plek 4
+    'mob-4': 'contact',    // plek 5
+    
+    // AeroForge & Terminal
+    'af-status':          'ONLINE',
+    'af-title':           'AeroForge SMP',
+    'af-version':         'NeoForge 1.21.1',
+    'af-desc':            'Dit is een op maat gemaakte Minecraft server die volledig wordt beheerd door de geavanceerde AI Microslop Support Bot. Automatisch beheer, snelle interacties en direct verbonden met Discord.',
+    'af-pack-title':      'MODPACK BESTAND (.mrpack)',
+    'af-btn-download':    'Download mrpack',
+    'af-download-sub':    'Klik om direct te installeren via Modrinth/CurseForge',
+    'af-terminal-user':   'microslop-support-bot@system:~',
+    'af-cat-general':     '── algemeen ──',
+    'af-cmd-help':        '.help — laat dit zien',
+    'af-cmd-uptime':      '.uptime — hoe lang de bot draait',
+    'af-cmd-purge':       '.purge [1-100 / all] [ww] — verwijder berichten',
+    'af-cmd-roast':       '.roast @user — roast iemand',
+    'af-cmd-poll':        '.poll [vraag] | [opt1] | [opt2] — stemming',
+    'af-cmd-coinflip':    '.coinflip — kop of munt',
+    'af-cmd-mock':        '.mock [tekst] — SpOnGeBoB tekst',
+    'af-cmd-ship':        '.ship @a @b — compatibiliteit',
+    'af-cmd-userinfo':    '.userinfo [@user] — gebruikersinfo',
+    'af-cmd-serverinfo':  '.serverinfo — discord server info',
+    'af-cmd-freechat':    '.freechat — toggle free-chat voor dit kanaal',
+    'af-cat-admin':       '── server beheer ──',
+    'af-cmd-setup':       '.setup [ww] — zet de hele server op (kanalen, rollen, regels)',
+    'af-cmd-setwelcome':  '.setwelcome #kanaal — stel het welkomstkanaal in',
+    'af-cmd-setautorole': '.setautorole @rol — stel de auto-rol in bij joinen',
+    'af-cmd-setwelcome-msg': '.setwelcomemsg [bericht] — pas het welkomstbericht aan ({user} = ping)',
+    'af-cat-minecraft':   '── minecraft ──',
+    'af-cmd-mchelp':      '.mchelp — alle minecraft commando\'s',
+    'af-cmd-mcstatus':    '.mcstatus — online/offline + speleraantal',
+    'af-cmd-mcplayers':   '.mcplayers — wie is er nu online',
+    'af-cmd-mcmods':      '.mcmods — geïnstalleerde mods',
+    'af-cmd-mcjoin':      '.mcjoin — hoe te joinen (IP, poort, versie, mods)',
+    'af-cmd-mcinfo':      '.mcinfo — volledige server info',
+    'af-cmd-mcwhitelist': '.mcwhitelist — whitelist',
+    'af-cmd-mcbanned':    '.mcbanned — gebande spelers',
+    'af-cmd-mcops':       '.mcops — operators/admins',
+    'af-cmd-mcrcon':      '.mcrcon [commando] [ww] — stuur RCON commando',
+
     marquee: [
-    'Wist je dat water nat is?',
-    'Wist je dat als je valt, de grond je altijd vangt?',
-    'Wist je dat je met je benen kunt lopen als je ze beweegt?',
-    'Wist je dat als je hard rent, je sneller bent dan wanneer je langzaam loopt?',
-    'Wist je dat een steen zwaar is, tenzij hij klein is?',
-    'Wist je dat als je stopt met ademen, je dood gaat?',
-    'Wist je dat als je een trap op loopt, je hoger komt dan toen je begon?',
-    'Wist je dat water dat je niet drinkt, gewoon nat blijft?',
-    'Wist je dat als je praat, er geluid uit je mond komt?',
-    'Wist je dat een gat in de grond eigenlijk een afwezigheid van grond is?',
-    'Wist je dat 6 bang is voor 7?',
-    'Wist je dat, dat je wist?',
+      'Wist je dat water nat is?',
+      'Wist je dat als je valt, de grond je altijd vangt?',
+      'Wist je dat je met je benen kunt lopen als je ze beweegt?',
+      'Wist je dat als je hard ren, je sneller bent dan wanneer je langzaam loopt?',
+      'Wist je dat een steen zwaar is, tenzij hij klein is?',
+      'Wist je dat als je stopt met ademen, je dood gaat?',
+      'Wist je dat als je een trap op loopt, je hoger komt dan toen je begon?',
+      'Wist je dat water dat je niet drinkt, gewoon nat blijft?',
+      'Wist je dat als je praat, er geluid uit je mond komt?',
+      'Wist je dat een gat in de grond eigenlijk een afwezigheid van grond is?',
+      'Wist je dat 6 bang is voor 7?',
+      'Wist je dat, dat je wist?',
     ]
   },
   en: {
@@ -259,31 +310,79 @@ const translations = {
     'panel-01':    '01 / about me',
     'panel-02':    '02 / skills',
     'panel-03':    '03 / projects',
+    'panel-04':    '04 / extras',
     'over-bio':    '18 years old. Results pending. I build mods, sites and scripts for <span class="accent">experience</span> and <span class="accent">connections</span>.',
-    'chip-0': 'The school with the glass toilet doors.',
-    'chip-1': 'Waiting for my results',
-    'chip-2': 'NL · TR · EN',
+    'chip-0':      'The school with the glass toilet doors.',
+    'chip-1':      'Waiting for my results',
+    'chip-2':      'NL · TR · EN',
     'proj-desc-0': 'Islamic inspired items & blocks in Minecraft. Teaches players about Islam and its history.',
     'proj-desc-1': 'New gemstones, mobs & structures. Gems grant unique abilities via the Smithing Table.',
     'proj-desc-2': 'Please do not visit the website.',
     'proj-desc-3': 'Discord AI-bot for MC server management via Ollama (llama3.2). Local, no API costs.',
     'status':      'EXAMS OVER!',
-    'nav-0': 'about', 'nav-1': 'skills', 'nav-2': 'projects', 'nav-3': 'contact',
-    'mob-0': 'about', 'mob-1': 'skills', 'mob-2': 'projects', 'mob-3': 'contact',
-      marquee: [
-    'Did you know water is wet?',
-    'Did you know if you fall, the ground always catches you?',
-    'Did you know you can walk with your legs if you move them?',
-    'Did you know if you run fast, you\'re faster than when you walk slowly?',
-    'Did you know a rock is heavy, unless it\'s small?',
-    'Did you know if you stop breathing, you die?',
-    'Did you know if you go up stairs, you end up higher than when you started?',
-    'Did you know water you don\'t drink just stays wet?',
-    'Did you know when you talk, sound comes out of your mouth?',
-    'Did you know a hole in the ground is just an absence of ground?',
-    'Did you know 6 is afraid of 7?',
-    'Did you know that you knew that?',
-  ]
+    
+    // Desktop Nav
+    'nav-0': 'about', 'nav-1': 'skills', 'nav-2': 'projects', 'nav-3': 'contact', 'nav-4': 'extras',
+    
+    // Mobile Nav
+    'mob-0': 'about',
+    'mob-1': 'skills',
+    'mob-2': 'projects',
+    'mob-3': 'extras',
+    'mob-4': 'contact',
+    
+    // AeroForge & Terminal
+    'af-status':          'ONLINE',
+    'af-title':           'AeroForge SMP',
+    'af-version':         'NeoForge 1.21.1',
+    'af-desc':            'This is a custom-built Minecraft server fully managed by the advanced AI Microslop Support Bot. Automated management, fast interactions, and directly linked to Discord.',
+    'af-pack-title':      'MODPACK FILE (.mrpack)',
+    'af-btn-download':    'Download mrpack',
+    'af-download-sub':    'Click to install directly via Modrinth/CurseForge',
+    'af-terminal-user':   'microslop-support-bot@system:~',
+    'af-cat-general':     '── general ──',
+    'af-cmd-help':        '.help — show this message',
+    'af-cmd-uptime':      '.uptime — how long the bot has been running',
+    'af-cmd-purge':       '.purge [1-100 / all] [pw] — delete messages',
+    'af-cmd-roast':       '.roast @user — roast someone',
+    'af-cmd-poll':        '.poll [question] | [opt1] | [opt2] — start a poll',
+    'af-cmd-coinflip':    '.coinflip — flip a coin',
+    'af-cmd-mock':        '.mock [text] — SpOnGeBoB text',
+    'af-cmd-ship':        '.ship @a @b — compatibility check',
+    'af-cmd-userinfo':    '.userinfo [@user] — user information',
+    'af-cmd-serverinfo':  '.serverinfo — discord server info',
+    'af-cmd-freechat':    '.freechat — toggle free-chat for this channel',
+    'af-cat-admin':       '── server management ──',
+    'af-cmd-setup':       '.setup [pw] — set up the entire server (channels, roles, rules)',
+    'af-cmd-setwelcome':  '.setwelcome #channel — set the welcome channel',
+    'af-cmd-setautorole': '.setautorole @role — set auto-role upon joining',
+    'af-cmd-setwelcome-msg': '.setwelcomemsg [message] — customize the welcome message ({user} = ping)',
+    'af-cat-minecraft':   '── minecraft ──',
+    'af-cmd-mchelp':      '.mchelp — all minecraft commands',
+    'af-cmd-mcstatus':    '.mcstatus — online/offline + player count',
+    'af-cmd-mcplayers':   '.mcplayers — who is currently online',
+    'af-cmd-mcmods':      '.mcmods — installed mods',
+    'af-cmd-mcjoin':      '.mcjoin — how to join (IP, port, version, mods)',
+    'af-cmd-mcinfo':      '.mcinfo — full server info',
+    'af-cmd-mcwhitelist': '.mcwhitelist — whitelist',
+    'af-cmd-mcbanned':    '.mcbanned — banned players',
+    'af-cmd-mcops':       '.mcops — operators/admins',
+    'af-cmd-mcrcon':      '.mcrcon [command] [pw] — send RCON command',
+
+    marquee: [
+      'Did you know water is wet?',
+      'Did you know if you fall, the ground always catches you?',
+      'Did you know you can walk with your legs if you move them?',
+      'Did you know if you run fast, you\'re faster than when you walk slowly?',
+      'Did you know a rock is heavy, unless it\'s small?',
+      'Did you know if you stop breathing, you die?',
+      'Did you know if you go up stairs, you end up higher than when you started?',
+      'Did you know water you don\'t drink just stays wet?',
+      'Did you know when you talk, sound comes out of your mouth?',
+      'Did you know a hole in the ground is just an absence of ground?',
+      'Did you know 6 is afraid of 7?',
+      'Did you know that you knew that?',
+    ]
   },
   tr: {
     'hero-sup':    'SINAVLAR BİTTİ!',
@@ -293,75 +392,193 @@ const translations = {
     'panel-01':    '01 / hakkımda',
     'panel-02':    '02 / beceriler',
     'panel-03':    '03 / projeler',
+    'panel-04':    '04 / ekstralar',
     'over-bio':    '18 yaşında. Sonuçlar bekleniyor. <span class="accent">Deneyim</span> ve <span class="accent">bağlantı</span> için mod, site ve script yapıyorum.',
-    'chip-0': 'Cam tuvalet kapılı okul.',
-    'chip-1': 'Sonuçlarımı bekliyorum',
-    'chip-2': 'NL · TR · EN',
+    'chip-0':      'Cam tuvalet kapılı okul.',
+    'chip-1':      'Sonuçlarımı bekliyorum',
+    'chip-2':      'NL · TR · EN',
     'proj-desc-0': 'Minecraft\'a İslami ilhamlı eşyalar & bloklar. Oyunculara İslam\'ı ve tarihini öğretir.',
     'proj-desc-1': 'Yeni mücevherler, moblar & yapılar. Gems, Smithing Table ile benzersiz yetenekler verir.',
     'proj-desc-2': 'Lütfen siteyi ziyaret etmeyin.',
     'proj-desc-3': 'Ollama (llama3.2) ile MC sunucu yönetimi için Discord AI-botu. Yerel, API maliyeti yok.',
     'status':      'SINAVLAR BİTTİ!',
-    'nav-0': 'hakkında', 'nav-1': 'beceriler', 'nav-2': 'projeler', 'nav-3': 'iletişim',
-    'mob-0': 'hakkında', 'mob-1': 'beceriler', 'mob-2': 'projeler', 'mob-3': 'iletişim',
-      marquee: [
-    'Suyun ıslak olduğunu biliyor muydun?',
-    'Düştüğünde yerin seni her zaman tuttuğunu biliyor muydun?',
-    'Bacaklarını hareket ettirirsen yürüyebileceğini biliyor muydun?',
-    'Hızlı koşarsan yavaş yürümekten daha hızlı olduğunu biliyor muydun?',
-    'Taşın küçük olmadıkça ağır olduğunu biliyor muydun?',
-    'Nefes almayı bırakırsan öleceğini biliyor muydun?',
-    'Merdiven çıkarsan başladığından daha yüksekte olduğunu biliyor muydun?',
-    'İçmediğin suyun ıslak kalmaya devam ettiğini biliyor muydun?',
-    'Konuştuğunda ağzından ses çıktığını biliyor muydun?',
-    'Yerdeki çukurun aslında toprağın yokluğu olduğunu biliyor muydun?',
-    '6\'nın 7\'den korktuğunu biliyor muydun?',
-    'Bunu bildiğini bildiğini biliyor muydun?',
-  ]
+    
+    // Desktop Nav
+    'nav-0': 'hakkında', 'nav-1': 'beceriler', 'nav-2': 'projeler', 'nav-3': 'iletişim', 'nav-4': 'ekstralar',
+    
+    // Mobile Nav
+    'mob-0': 'hakkında',
+    'mob-1': 'beceriler',
+    'mob-2': 'projeler',
+    'mob-3': 'ekstralar',
+    'mob-4': 'iletişim',
+    
+    // AeroForge & Terminal
+    'af-status':          'ÇEVRİMİÇİ',
+    'af-title':           'AeroForge SMP',
+    'af-version':         'NeoForge 1.21.1',
+    'af-desc':            'Bu, gelişmiş yapay zeka Microslop Destek Botu tarafından tamamen yönetilen, özel tasarım bir Minecraft sunucusudur. Otomatik yönetim, hızlı etkileşimler ve doğrudan Discord bağlantısı.',
+    'af-pack-title':      'MODPAKETİ DOSYASI (.mrpack)',
+    'af-btn-download':    'mrpack İndir',
+    'af-download-sub':    'Modrinth/CurseForge üzerinden doğrudan kurmak için tıkla',
+    'af-terminal-user':   'microslop-support-bot@system:~',
+    'af-cat-general':     '── genel ──',
+    'af-cmd-help':        '.help — bunu gösterir',
+    'af-cmd-uptime':      '.uptime — botun ne kadar süredir çalıştığı',
+    'af-cmd-purge':       '.purge [1-100 / all] [şifre] — mesajları siler',
+    'af-cmd-roast':       '.roast @user — birine laf sokar / roast',
+    'af-cmd-poll':        '.poll [soru] | [sec1] | [sec2] — oylama',
+    'af-cmd-coinflip':    '.coinflip — yazı tura',
+    'af-cmd-mock':        '.mock [metin] — SpOnGeBoB metni',
+    'af-cmd-ship':        '.ship @a @b — uyumluluk testi',
+    'af-cmd-userinfo':    '.userinfo [@user] — kullanıcı bilgisi',
+    'af-cmd-serverinfo':  '.serverinfo — discord sunucu bilgisi',
+    'af-cmd-freechat':    '.freechat — bu kanal için serbest sohbeti aç/kapat',
+    'af-cat-admin':       '── sunucu yönetimi ──',
+    'af-cmd-setup':       '.setup [şifre] — tüm sunucuyu kurar (kanallar, roller, kurallar)',
+    'af-cmd-setwelcome':  '.setwelcome #kanal — hoş geldin kanalını ayarlar',
+    'af-cmd-setautorole': '.setautorole @rol — katılıma otomatik rol atar',
+    'af-cmd-setwelcome-msg': '.setwelcomemsg [mesaj] — hoş geldin mesajını düzenler ({user} = etiket)',
+    'af-cat-minecraft':   '── minecraft ──',
+    'af-cmd-mchelp':      '.mchelp — tüm minecraft komutları',
+    'af-cmd-mcstatus':    '.mcstatus — çevrimiçi/çevrimdışı + oyuncu sayısı',
+    'af-cmd-mcplayers':   '.mcplayers — şu an kimler çevrimiçi',
+    'af-cmd-mcmods':      '.mcmods — kurulu modlar',
+    'af-cmd-mcjoin':      '.mcjoin — nasıl katılınır (IP, port, sürüm, modlar)',
+    'af-cmd-mcinfo':      '.mcinfo — tam sunucu bilgisi',
+    'af-cmd-mcwhitelist': '.mcwhitelist — beyaz liste (whitelist)',
+    'af-cmd-mcbanned':    '.mcbanned — yasaklı oyuncular',
+    'af-cmd-mcops':       '.mcops — authorities/admins',
+    'af-cmd-mcrcon':      '.mcrcon [komut] [şifre] — RCON komutu gönderir',
+
+    marquee: [
+      'Suyun ıslak olduğunu biliyor muydun?',
+      'Düştüğünde yerin seni her zaman tuttuğunu biliyor muydun?',
+      'Bacaklarını hareket ettirirsen yürüyebileceğini biliyor muydun?',
+      'Hızlı koşarsan yavaş yürümekten daha hızlı olduğunu biliyor muydun?',
+      'Taşın küçük olmadıkça ağır olduğunu biliyor muydun?',
+      'Nefes almayı bırakırsan öleceğini biliyor muydun?',
+      'Merdiven çıkarsan başladığından daha yüksekte olduğunu biliyor muydun?',
+      'İçmediğin suyun ıslak kalmaya devam ettiğini biliyor muydun?',
+      'Konuştuğunda ağzından ses çıktığını biliyor muydun?',
+      'Yerdeki çukurun aslında toprağın yokluğu olduğunu biliyor muydun?',
+      '6\'nın 7\'den korktuğunu biliyor muydun?',
+      'Bunu bildiğini bildiğini biliyor muydun?',
+    ]
   }
 };
+
 function applyLang(lang) {
   const t = translations[lang];
+  if (!t) return;
 
-  document.querySelector('.hero-sup').textContent = t['hero-sup'];
-  document.querySelector('.hero-sub').textContent = t['hero-sub'];
-  document.querySelector('#projBtn').textContent  = t['btn-primary'];
-  document.querySelector('.over-bio').innerHTML   = t['over-bio'];
-  document.querySelector('.status-text').textContent = t['status'];
+  // Algemene teksten
+  if (document.querySelector('.hero-sup')) document.querySelector('.hero-sup').textContent = t['hero-sup'];
+  if (document.querySelector('.hero-sub')) document.querySelector('.hero-sub').textContent = t['hero-sub'];
+  if (document.querySelector('#projBtn')) document.querySelector('#projBtn').textContent  = t['btn-primary'];
+  if (document.querySelector('.over-bio')) document.querySelector('.over-bio').innerHTML   = t['over-bio'];
+  if (document.querySelector('.status-text')) document.querySelector('.status-text').textContent = t['status'];
 
-  // panel labels
+  // Panel labels (00 t/m 04)
   const labels = document.querySelectorAll('.panel-label');
-  labels[0].textContent = t['panel-00'];
-  labels[1].textContent = t['panel-01'];
-  labels[2].textContent = t['panel-02'];
-  labels[3].textContent = t['panel-03'];
+  labels.forEach((el, i) => {
+    const key = `panel-0${i}`;
+    if (t[key]) el.textContent = t[key];
+  });
 
-  // stat chips
+  // Stat chips
   document.querySelectorAll('.chip-val').forEach((el, i) => {
     if (t[`chip-${i}`]) el.textContent = t[`chip-${i}`];
   });
 
-  // project descriptions
+  // Project descriptions
   document.querySelectorAll('.proj-card p').forEach((el, i) => {
     if (t[`proj-desc-${i}`]) el.textContent = t[`proj-desc-${i}`];
   });
 
-  // desktop nav links
+  // Desktop nav links (0 t/m 4)
   document.querySelectorAll('nav ul a').forEach((el, i) => {
     if (t[`nav-${i}`]) el.textContent = t[`nav-${i}`];
   });
 
-  // mobile nav links
+  // Mobile nav links (0 t/m 4)
   document.querySelectorAll('.mobile-nav__panel a').forEach((el, i) => {
     if (t[`mob-${i}`]) el.textContent = t[`mob-${i}`];
   });
 
-  // active button
+  /* ============================================
+     AeroForge & Terminal (Gekoppeld aan jouw HTML)
+     ============================================ */
+  
+  // Server Info Box
+  if (document.querySelector('.server-status-pill')) {
+    document.querySelector('.server-status-pill').textContent = t['af-status'];
+  }
+  if (document.querySelector('.server-title-row h2')) {
+    document.querySelector('.server-title-row h2').textContent = t['af-title'];
+  }
+  if (document.querySelector('.server-badge')) {
+    document.querySelector('.server-badge').textContent = t['af-version'];
+  }
+  if (document.querySelector('.server-description')) {
+    document.querySelector('.server-description').textContent = t['af-desc'];
+  }
+  
+  // Download sectie
+  if (document.querySelector('.download-label')) {
+    document.querySelector('.download-label').textContent = t['af-pack-title'];
+  }
+  if (document.querySelector('.btn-title')) {
+    document.querySelector('.btn-title').textContent = t['af-btn-download'];
+  }
+  if (document.querySelector('.btn-subtext')) {
+    document.querySelector('.btn-subtext').textContent = t['af-download-sub'];
+  }
+
+  // Terminal Header
+  if (document.querySelector('.terminal-title')) {
+    document.querySelector('.terminal-title').textContent = t['af-terminal-user'];
+  }
+
+  // Terminal Commando's & Categorieën
+  const cmdHeaders = document.querySelectorAll('.cmd-header');
+  if (cmdHeaders.length >= 3) {
+    cmdHeaders[0].textContent = t['af-cat-general'];
+    cmdHeaders[1].textContent = t['af-cat-admin'];
+    cmdHeaders[2].textContent = t['af-cat-minecraft'];
+  }
+
+  // Loop door alle cmd-lines om de beschrijvingen te vertalen
+  const cmdLines = document.querySelectorAll('.cmd-line');
+  
+  const cmdKeys = [
+    'af-cmd-help', 'af-cmd-uptime', 'af-cmd-purge', 'af-cmd-roast', 'af-cmd-poll', 
+    'af-cmd-coinflip', 'af-cmd-mock', 'af-cmd-ship', 'af-cmd-userinfo', 'af-cmd-serverinfo', 'af-cmd-freechat',
+    'af-cmd-setup', 'af-cmd-setwelcome', 'af-cmd-setautorole', 'af-cmd-setwelcome-msg',
+    'af-cmd-mchelp', 'af-cmd-mcstatus', 'af-cmd-mcplayers', 'af-cmd-mcmods', 'af-cmd-mcjoin', 
+    'af-cmd-mcinfo', 'af-cmd-mcwhitelist', 'af-cmd-mcbanned', 'af-cmd-mcops', 'af-cmd-mcrcon'
+  ];
+
+  cmdLines.forEach((el, i) => {
+    const key = cmdKeys[i];
+    if (key && t[key]) {
+      const cmdSpan = el.querySelector('.cmd');
+      if (cmdSpan) {
+        const cmdText = cmdSpan.outerHTML;
+        const translationParts = t[key].split('—');
+        if (translationParts.length > 1) {
+          el.innerHTML = `${cmdText} — ${translationParts[1].trim()}`;
+        }
+      }
+    }
+  });
+
+  // Active language button classes toggelen
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
-  // marquee updaten
+  // Marquee real-time updaten bij taalwissel
   const track = document.querySelector('.marquee-track');
   if (track && t.marquee) {
     const html = [...t.marquee, ...t.marquee]
@@ -375,6 +592,7 @@ function applyLang(lang) {
   }
 }
 
+// Event listeners toevoegen aan taalknoppen
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
