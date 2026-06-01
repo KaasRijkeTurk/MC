@@ -238,6 +238,10 @@ const translations = {
     'proj-desc-2': 'Bezoek de website astublieft niet.',
     'proj-desc-3': 'Discord AI-bot voor MC serverbeheer via Ollama (llama3.2). Lokaal, geen API-kosten.',
     'status':      'EXAMENS VOORBIJ!',
+    'proj-title-4':  'M365 Nopilot Command-Bot',
+    'proj-status-4': 'Binnenkort beschikbaar',
+    'proj-badge-4':  'SOON',
+    'proj-desc-4':   "Discord Command-bot voor het sorteren van YouTube-afspeellijsten en het categoriseren van video's via Ollama (llama3.1:8b). Volledig lokaal, dus geen API-kosten.",
     
     // Desktop Nav Volgorde
     'nav-0': 'over', 'nav-1': 'skills', 'nav-2': 'projecten', 'nav-3': 'contact', 'nav-4': "extra's",
@@ -320,7 +324,11 @@ const translations = {
     'proj-desc-2': 'Please do not visit the website.',
     'proj-desc-3': 'Discord AI-bot for MC server management via Ollama (llama3.2). Local, no API costs.',
     'status':      'EXAMS OVER!',
-    
+    'proj-title-4':  'M365 Nopilot Command-Bot',
+    'proj-status-4': 'Coming soon',
+    'proj-badge-4':  'SOON',
+    'proj-desc-4':   "Discord Command-bot for sorting YouTube playlists and categorizing videos via Ollama (llama3.1:8b). Completely local, so no API costs.",
+   
     // Desktop Nav
     'nav-0': 'about', 'nav-1': 'skills', 'nav-2': 'projects', 'nav-3': 'contact', 'nav-4': 'extras',
     
@@ -402,7 +410,11 @@ const translations = {
     'proj-desc-2': 'Lütfen siteyi ziyaret etmeyin.',
     'proj-desc-3': 'Ollama (llama3.2) ile MC sunucu yönetimi için Discord AI-botu. Yerel, API maliyeti yok.',
     'status':      'SINAVLAR BİTTİ!',
-    
+    'proj-title-4':  'M365 Nopilot Command-Bot',
+    'proj-status-4': 'Yakında gelecek',
+    'proj-badge-4':  'YAKINDA',
+    'proj-desc-4':   "YouTube oynatma listelerini sıralamak ve videoları Ollama (llama3.1:8b) üzerinden kategorize etmek için Discord Command-botu. Tamamen yerel, yani API maliyeti yok.",
+
     // Desktop Nav
     'nav-0': 'hakkında', 'nav-1': 'beceriler', 'nav-2': 'projeler', 'nav-3': 'iletişim', 'nav-4': 'ekstralar',
     
@@ -494,7 +506,16 @@ function applyLang(lang) {
   // Project descriptions
   document.querySelectorAll('.proj-card p').forEach((el, i) => {
     if (t[`proj-desc-${i}`]) el.textContent = t[`proj-desc-${i}`];
-  });
+    
+  })
+  // Specifieke updates voor de nieuwe projectkaart (index 4)
+  if (document.querySelector('.proj-card:nth-of-type(5) .proj-version')) {
+    document.querySelector('.proj-card:nth-of-type(5) .proj-version').textContent = t['proj-status-4'];
+  }
+  if (document.querySelector('.proj-card:nth-of-type(5) .wip-badge')) {
+    document.querySelector('.proj-card:nth-of-type(5) .wip-badge').textContent = t['proj-badge-4'];
+  };
+  
 
   // Desktop nav links (0 t/m 4)
   document.querySelectorAll('nav ul a').forEach((el, i) => {
