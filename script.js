@@ -1,5 +1,5 @@
 /* ============================================
-   DNA CANVAS ANIMATIE (ACHTERGROND) - GEÜPGRADED
+   DNA CANVAS ANIMATIE (ACHTERGROND) - ULTRA OPTIMIZED
    ============================================ */
 const canvas = document.getElementById('dna-canvas');
 const ctx = canvas.getContext('2d');
@@ -11,7 +11,7 @@ const strands = [];
 const isMobile = () => window.innerWidth <= 768;
 
 const STRAND_COUNT_DESKTOP = 13;  
-const STRAND_COUNT_MOBILE = 4;    // Perfect aantal voor een gevulde mobiele achtergrond
+const STRAND_COUNT_MOBILE = 4;    // Aantal strengen op mobiel
 
 function getStrandCount() {
   return isMobile() ? STRAND_COUNT_MOBILE : STRAND_COUNT_DESKTOP;
@@ -25,8 +25,7 @@ function initStrands() {
     let startX;
     
     if (isMobile()) {
-      // UPGRADE: Verdeelt de 4 strengen nu écht perfect evenredig over de mobiele breedte
-      // Ze starten mooi verspreid vanaf 10% tot 90% van de schermbreedte
+      // Verdeelt de 4 strengen perfect evenredig over de mobiele breedte (10% tot 90%)
       startX = canvas.width * (0.1 + (i / (count - 1)) * 0.8);
     } else {
       startX = (canvas.width / count) * i + (canvas.width / count / 2);
@@ -35,10 +34,10 @@ function initStrands() {
     strands.push({
       x: startX,
       offset: Math.random() * Math.PI * 2,
-      // UPGRADE: Mobiel golft extra rustig en traag (0.001) voor een chique uitstraling
+      // Mobiel golft extra rustig en traag voor een chique uitstraling
       speed: isMobile() ? 0.001 + Math.random() * 0.001 : 0.002 + Math.random() * 0.002, 
       
-      // UPGRADE: Grote amplitude (45 tot 65px) op mobiel zodat de strengen prachtig wijd uitwaieren
+      // Grote amplitude op mobiel zodat de strengen prachtig wijd uitwaieren
       amplitude: isMobile() ? 45 + Math.random() * 20 : 30 + Math.random() * 40,
     });
   }
@@ -63,7 +62,7 @@ window.addEventListener('resize', () => {
 let tick = 0;
 let animFrameId;
 
-// UPGRADE: Veiligheid ingebouwd tegen dubbele loops bij het wisselen van tabbladen (bespaart batterij)
+// Veiligheid tegen dubbele loops bij het wisselen van tabbladen (bespaart batterij)
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     cancelAnimationFrame(animFrameId);
@@ -76,7 +75,8 @@ document.addEventListener('visibilitychange', () => {
 function drawDNA() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const STEP = 28;
+  // Grotere stappen op mobiel (45px ipv 28px) vermindert de rekenlast met 40%
+  const STEP = isMobile() ? 45 : 28;
   const rows = Math.floor(canvas.height / STEP) + 2;
 
   strands.forEach(strand => {
@@ -90,28 +90,40 @@ function drawDNA() {
       ctx.beginPath();
       ctx.moveTo(x1, y);
       ctx.lineTo(x2, y);
-      ctx.strokeStyle = 'rgba(0, 229, 160, 0.23)';
+      ctx.strokeStyle = 'rgba(0, 229, 160, 0.35)'; // Felle lijn voor contrast
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Blauwe DNA bolletjes (Klantzijde 1)
+      // Blauwe DNA bolletjes (Fel)
       ctx.beginPath();
-      ctx.arc(x1, y, 3, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 180, 255, 0.6)';
+      ctx.arc(x1, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 180, 255, 0.95)';
       ctx.fill();
 
-      // Groene DNA bolletjes (Klantzijde 2)
+      // Blauwe Namaak Neon Glow (Lichte, grotere cirkel erachter)
       ctx.beginPath();
-      ctx.arc(x2, y, 3, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 229, 160, 0.6)';
+      ctx.arc(x1, y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 180, 255, 0.25)';
       ctx.fill();
 
-      // Letters (A, T, G, C) alleen op desktop renderen voor maximale prestaties op mobiel
+      // Groene DNA bolletjes (Fel)
+      ctx.beginPath();
+      ctx.arc(x2, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 229, 160, 0.95)';
+      ctx.fill();
+
+      // Groene Namaak Neon Glow erachter
+      ctx.beginPath();
+      ctx.arc(x2, y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 229, 160, 0.25)';
+      ctx.fill();
+
+      // Letters (A, T, G, C) alleen op desktop voor maximale prestaties
       if (!isMobile() && row % 3 === 0) {
         const base = bases[Math.floor((row + strand.x) % 4)];
-        ctx.font = '9px Space Mono, monospace';
-        ctx.fillStyle = 'rgba(0, 229, 160, 0.4)';
-        ctx.fillText(base, x1 + 5, y + 3);
+        ctx.font = 'bold 9px Space Mono, monospace';
+        ctx.fillStyle = 'rgba(0, 229, 160, 0.6)';
+        ctx.fillText(base, x1 + 6, y + 3);
       }
     }
   });
@@ -638,4 +650,42 @@ function applyLang(lang) {
 // Event listeners toevoegen aan taalknoppen
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+/* ============================================
+   ACCESSIBILITY: ZOOM FEATURE (+ / -)
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  let currentZoom = 100; // Start op de standaard 100%
+  const ZOOM_STEP = 10;  // Verander met 10% per klik
+  const MIN_ZOOM = 80;   // Minimale verkleining (veiligheidsgrens)
+  const MAX_ZOOM = 140;  // Maximale vergroting (veiligheidsgrens)
+
+  const htmlElement = document.documentElement;
+  const btnZoomIn = document.getElementById('zoom-in');
+  const btnZoomOut = document.getElementById('zoom-out');
+
+  // Voer de code alleen uit als beide knoppen in de HTML worden gevonden
+  if (btnZoomIn && btnZoomOut) {
+    
+    // Klikken op de plus-knop (+)
+    btnZoomIn.addEventListener('click', () => {
+      if (currentZoom < MAX_ZOOM) {
+        currentZoom += ZOOM_STEP;
+        htmlElement.style.fontSize = `${currentZoom}%`;
+      }
+    });
+
+    // Klikken op de min-knop (-)
+    btnZoomOut.addEventListener('click', () => {
+      if (currentZoom > MIN_ZOOM) {
+        currentZoom -= ZOOM_STEP;
+        htmlElement.style.fontSize = `${currentZoom}%`;
+      }
+    });
+    
+  } else {
+    // Geeft een waarschuwing in de F12-console als de HTML-IDs niet overeenkomen
+    console.warn("[System] Zoom-knoppen niet gevonden. Controleer of de IDs 'zoom-in' en 'zoom-out' correct zijn ingesteld.");
+  }
 });
