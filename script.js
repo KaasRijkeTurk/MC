@@ -8,12 +8,13 @@ const bases = ['A', 'T', 'G', 'C'];
 const strands = [];
 
 // Fewer strands on mobile for performance
-const isMobile = () => window.innerWidth <= 768;
-const STRAND_COUNT_DESKTOP = 8;
+const isMobile = () => true;
+const STRAND_COUNT_DESKTOP = 14;
 const STRAND_COUNT_MOBILE = 4;
 
+// Verander dit (rond regel 15):
 function getStrandCount() {
-  return isMobile() ? STRAND_COUNT_MOBILE : STRAND_COUNT_DESKTOP;
+  return STRAND_COUNT_DESKTOP; // Veranderd van isMobile() ? ... naar altijd desktop aantal (8)
 }
 
 function initStrands() {

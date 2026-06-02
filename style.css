@@ -21,7 +21,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
+/*html, body {
   height: 100%;
   overflow: hidden;
   background: var(--bg);
@@ -29,6 +29,16 @@ html, body {
   font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.6;
+}*/
+html, body {
+  min-height: 100%;
+  overflow-y: auto; /* Zorgt dat je verticaal kunt scrollen */
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  /* Geen centrering meer nodig, we vullen het hele scherm */
 }
 
 a { color: inherit; text-decoration: none; }
@@ -240,7 +250,7 @@ nav ul a:hover { color: var(--accent); }
 /* ============================================
    DASHBOARD LAYOUT
    ============================================ */
-.dashboard {
+/*.dashboard {
   position: fixed;
   top: var(--nav-h);
   bottom: var(--bar-h);
@@ -250,14 +260,48 @@ nav ul a:hover { color: var(--accent); }
   grid-template-columns: 280px 1fr 1.4fr;
   grid-template-rows: 1fr;
   background: transparent;
+}*/
+.dashboard {
+  margin-top: var(--nav-h);      /* Ruimte onder de nav-balk */
+  margin-bottom: var(--bar-h);   /* Ruimte boven de footer-bar */
+  width: 100%;                   /* Vult nu 100% van je scherm (laptop en mobiel) */
+  min-height: calc(100vh - var(--nav-h) - var(--bar-h));
+  z-index: 10;
+  
+  display: flex;                 /* Veranderd van Grid naar Flexbox */
+  flex-direction: column;        /* Dwingt alles strak onder elkaar */
 }
 
+/* Zorg dat de middelste kolomgroep zich nu ook netjes onder elkaar gedraagt */
 .panel-col-mid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+}
+
+/* Zorg dat elk paneel een subtiel randje aan de onderkant krijgt omdat ze nu onder elkaar staan */
+.panel {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-bottom: 1px solid var(--border); 
+}
+
+/*.dashboard {
+  margin-bottom: var(--bar-h);  
+  width: 100%;
+  max-width: 480px;             
+  min-height: calc(100vh - var(--nav-h) - var(--bar-h));
+  z-index: 10;
+}*/
+/*.panel-col-mid {
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 1px;
   background: var(--border);
-}
+}*/
 
 /* ============================================
    PANELS BASE CONFIG
@@ -957,7 +1001,7 @@ nav ul a:hover { color: var(--accent); }
 /* ============================================
    RESPONSIVE LAYOUT (TABLETS / SMALL LAPTOPS)
    ============================================ */
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
   html, body { overflow: auto; height: auto; }
 
   .dashboard {
@@ -967,7 +1011,7 @@ nav ul a:hover { color: var(--accent); }
     flex-direction: column;
     gap: 0;
     padding-bottom: 0;
-    height: auto; /* Fix: breaks viewport limits so content flows down */
+    height: auto; 
   }
 
   .panel-col-mid { display: contents; }
@@ -990,7 +1034,7 @@ nav ul a:hover { color: var(--accent); }
 
   .contact-label { width: 100%; margin-bottom: 0.1rem; }
   .bar-copy { display: block; width: 100%; margin-top: 0.2rem; font-size: 0.55rem; }
-}
+}*/
 
 /* Consolidated under 768px */
 @media (max-width: 768px) {
@@ -1030,4 +1074,35 @@ nav ul a:hover { color: var(--accent); }
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
+}
+/* ============================================
+   FORCEER MOBIELE INTERFACE & NAVIGATIE OVERAL
+   ============================================ */
+nav, .contact-bar {
+  width: 100% !important;
+  max-width: none !important; /* Haal de limiet van 480px weg */
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+}
+
+/* Verberg de desktop-navigatie linkjes, status-tekst en tagline */
+.nav-tagline, 
+.nav-status, 
+nav ul { 
+  display: none !important; 
+}
+
+/* Forceer de mobiele indeling voor de nav bar */
+nav {
+  padding: 0 1rem !important;
+}
+
+.nav-top {
+  padding: 0 !important;
+}
+
+/* Toon ALTIJD de mobiele hamburgerknop */
+.hamburger { 
+  display: flex !important; 
 }
