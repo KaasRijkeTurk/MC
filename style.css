@@ -16,29 +16,22 @@
   --font-mono: 'Space Mono', monospace;
   --font-display: 'Syne', sans-serif;
   --nav-h: 84px;
-  --bar-h: 36px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
 
-/*html, body {
-  height: 100%;
-  overflow: hidden;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.6;
-}*/
 html, body {
   min-height: 100%;
-  overflow-y: auto; /* Zorgt dat je verticaal kunt scrollen */
+  overflow-y: auto; /* Zorgt voor een natuurlijke, soepele scroll */
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.6;
-  /* Geen centrering meer nodig, we vullen het hele scherm */
 }
 
 a { color: inherit; text-decoration: none; }
@@ -71,20 +64,26 @@ ul { list-style: none; }
 }
 
 /* ============================================
-   NAVBAR
+   NAVBAR (OOGVRIENDELIJK GECENTREERD)
    ============================================ */
 nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  width: 100% !important;
+  max-width: 650px !important; /* Gelijk aan de breedte van de app-kolom */
+  left: 50% !important;
+  transform: translateX(-50%) !important; /* Centreert de balk netjes op PC */
+  top: 0;
   height: var(--nav-h);
   z-index: 160;
+  background: rgba(10, 12, 15, 0.96);
+  backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0;
-  background: rgba(10, 12, 15, 0.96);
+  padding: 0 1rem !important;
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
   overflow: hidden;
 }
 
@@ -93,7 +92,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  padding: 0 !important;
 }
 
 .nav-logo {
@@ -140,52 +139,17 @@ nav {
   margin-top: -4px;
 }
 
-.nav-tagline {
-  font-size: 0.65rem; /* Upgraded from 0.38rem for readability */
-  letter-spacing: 0.3em;
-  color: #fff;
-  font-family: var(--font-display);
-  font-weight: 600;
-  margin-top: 0.2rem;
-  padding-left: 0.3rem;
+/* Permanent verborgen desktop-elementen voor mobiele structuur */
+.nav-tagline,
+.nav-status,
+nav ul {
+  display: none !important;
 }
-.nav-tagline .accent { color: var(--accent); }
 
 .nav-right {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-}
-
-nav ul {
-  display: flex;
-  gap: 1.5rem;
-}
-
-nav ul a {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-  transition: color 0.2s;
-}
-nav ul a:hover { color: var(--accent); }
-
-.nav-status {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.58rem;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-}
-
-.status-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 6px var(--accent);
-  animation: blink 2s ease-in-out infinite;
-  flex-shrink: 0;
 }
 
 /* ============================================
@@ -248,60 +212,29 @@ nav ul a:hover { color: var(--accent); }
 }
 
 /* ============================================
-   DASHBOARD LAYOUT
+   DASHBOARD LAYOUT (GECENTREERDE APP COLUMN)
    ============================================ */
-/*.dashboard {
-  position: fixed;
-  top: var(--nav-h);
-  bottom: var(--bar-h);
-  left: 0; right: 0;
-  z-index: 10;
-  display: grid;
-  grid-template-columns: 280px 1fr 1.4fr;
-  grid-template-rows: 1fr;
-  background: transparent;
-}*/
 .dashboard {
-  margin-top: var(--nav-h);      /* Ruimte onder de nav-balk */
-  margin-bottom: var(--bar-h);   /* Ruimte boven de footer-bar */
-  width: 100%;                   /* Vult nu 100% van je scherm (laptop en mobiel) */
-  min-height: calc(100vh - var(--nav-h) - var(--bar-h));
+  position: relative !important;
+  margin: var(--nav-h) auto 2rem auto; /* Ruimte boven vanaf nav, en nette marge onderaan */
+  width: 100%;                   
+  max-width: 650px; /* Houdt de website compact en oogvriendelijk op laptops */
   z-index: 10;
-  
-  display: flex;                 /* Veranderd van Grid naar Flexbox */
-  flex-direction: column;        /* Dwingt alles strak onder elkaar */
+  display: flex !important;                 
+  flex-direction: column !important;        
+  gap: 0 !important;
+  background: transparent !important;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
 }
 
-/* Zorg dat de middelste kolomgroep zich nu ook netjes onder elkaar gedraagt */
+/* Middelste kolomgroep gedraagt zich als flex-kolom */
 .panel-col-mid {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 1px;
   background: var(--border);
 }
-
-/* Zorg dat elk paneel een subtiel randje aan de onderkant krijgt omdat ze nu onder elkaar staan */
-.panel {
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  border-bottom: 1px solid var(--border); 
-}
-
-/*.dashboard {
-  margin-bottom: var(--bar-h);  
-  width: 100%;
-  max-width: 480px;             
-  min-height: calc(100vh - var(--nav-h) - var(--bar-h));
-  z-index: 10;
-}*/
-/*.panel-col-mid {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 1px;
-  background: var(--border);
-}*/
 
 /* ============================================
    PANELS BASE CONFIG
@@ -310,8 +243,9 @@ nav ul a:hover { color: var(--accent); }
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   position: relative;
+  min-height: auto !important;
+  border-bottom: 1px solid var(--border);
 }
 
 .panel-header {
@@ -344,20 +278,20 @@ nav ul a:hover { color: var(--accent); }
 .panel-hero {
   background: transparent;
   box-shadow: none;
-  border-right: 1px solid var(--border);
 }
 
 .panel-hero .hero-inner {
-  padding: 1.2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
   flex: 1;
   overflow: hidden;
+  background: transparent;
 }
 
 .hero-sup {
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.15em;
   color: var(--accent);
   text-transform: uppercase;
@@ -366,23 +300,23 @@ nav ul a:hover { color: var(--accent); }
 .hero-inner h1 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  font-size: clamp(2rem, 5vw, 3.2rem); 
   line-height: 0.95;
   letter-spacing: -0.03em;
   color: #fff;
 }
 
-.hero-sub { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; }
+.hero-sub { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
 
 .hero-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.3rem; }
 
 .btn-primary {
   display: inline-block;
-  padding: 0.45rem 1rem;
+  padding: 0.5rem 1.2rem;
   background: var(--accent);
   color: #000;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   border-radius: 3px;
@@ -397,21 +331,21 @@ nav ul a:hover { color: var(--accent); }
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.45rem 1rem;
+  padding: 0.5rem 1.2rem;
   border: 1px solid var(--border2);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   border-radius: 3px;
   transition: border-color 0.15s, color 0.15s;
 }
 .btn-ghost svg { width: 12px; height: 12px; }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-.hero-socials { display: flex; gap: 0.4rem; margin-top: 0.2rem; flex-wrap: wrap; }
+.hero-socials { display: flex; gap: 0.5rem; margin-top: 0.2rem; flex-wrap: wrap; }
 .hero-socials a {
   display: flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px;
+  width: 34px; height: 34px;
   border: 1px solid var(--border2);
   border-radius: 4px;
   background: var(--surface);
@@ -448,28 +382,26 @@ nav ul a:hover { color: var(--accent); }
   transform: translate(2px, 1px);
   opacity: 0.8;
 }
-@keyframes glitch1 { 0%,100%{transform:translate(-2px,-1px)} 50%{transform:translate(2px,1px)} }
-@keyframes glitch2 { 0%,100%{transform:translate(2px,1px)} 50%{transform:translate(-2px,-1px)} }
 
 /* ============================================
    OVER MIJ PANEL
    ============================================ */
 .panel-over .over-inner {
-  padding: 0.9rem 1.1rem;
+  padding: 1.2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.8rem;
   overflow: hidden;
 }
 
-.over-bio { font-size: 0.72rem; color: var(--text-muted); line-height: 1.7; }
-.over-stats { display: flex; flex-direction: column; gap: 0.35rem; }
+.over-bio { font-size: 0.75rem; color: var(--text-muted); line-height: 1.7; }
+.over-stats { display: flex; flex-direction: column; gap: 0.4rem; }
 
 .stat-chip {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.3rem 0.6rem;
+  gap: 0.8rem;
+  padding: 0.4rem 0.8rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 3px;
@@ -479,53 +411,48 @@ nav ul a:hover { color: var(--accent); }
 .stat-chip:hover { border-color: var(--accent); }
 
 .chip-key {
-  font-size: 0.55rem;
+  font-size: 0.58rem;
   letter-spacing: 0.12em;
   color: var(--accent);
   text-transform: uppercase;
-  min-width: 44px;
+  min-width: 50px;
 }
-.chip-val { font-size: 0.68rem; color: var(--text); }
+.chip-val { font-size: 0.72rem; color: var(--text); }
 
 /* ============================================
    SKILLS PANEL
    ============================================ */
 .panel-skills .skills-inner {
-  padding: 0.9rem 1.1rem;
+  padding: 1.2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.8rem;
   overflow: hidden;
   flex: 1;
 }
 
-.skill-row { display: flex; flex-direction: column; gap: 0.3rem; }
-.skill-cat { font-size: 0.6rem; color: var(--accent2); letter-spacing: 0.05em; }
-.tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.skill-row { display: flex; flex-direction: column; gap: 0.4rem; }
+.skill-cat { font-size: 0.65rem; color: var(--accent2); letter-spacing: 0.05em; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
 .tag {
   display: inline-block;
-  padding: 0.2rem 0.55rem;
+  padding: 0.25rem 0.65rem;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 3px;
-  font-size: 0.62rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
   transition: border-color 0.15s, color 0.15s;
   cursor: default;
 }
 .tag:hover, .tag.sm:hover { border-color: var(--accent); color: var(--accent); }
-.tag.sm { padding: 0.15rem 0.45rem; font-size: 0.58rem; }
+.tag.sm { padding: 0.18rem 0.5rem; font-size: 0.62rem; }
 .tag.accent-tag { border-color: rgba(0,229,160,0.3); color: var(--accent); }
 
-
-/* ==========================================================================
-   04 / EXTRAS PANEL STYLING (Minecraft Server Section)
-   ========================================================================== */
-.panel-extras {
-  grid-column: span 1;
-}
-
+/* ============================================
+   EXTRAS PANEL (MINECRAFT)
+   ============================================ */
 .extras-inner {
   padding: 1.5rem;
   display: flex;
@@ -533,7 +460,6 @@ nav ul a:hover { color: var(--accent); }
   gap: 1.5rem;
 }
 
-/* Server Info Card */
 .server-info-box {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -583,7 +509,6 @@ nav ul a:hover { color: var(--accent); }
   margin-bottom: 1.25rem;
 }
 
-/* Download Module (.mrpack) */
 .download-container {
   border-top: 1px dashed rgba(255, 255, 255, 0.1);
   padding-top: 1rem;
@@ -642,7 +567,6 @@ nav ul a:hover { color: var(--accent); }
   margin-top: 2px;
 }
 
-/* Retro Terminal Window for Bot Commands */
 .terminal-window {
   background: #0d0e12;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -689,58 +613,16 @@ nav ul a:hover { color: var(--accent); }
   color: #a9b1d6;
 }
 
-/* Custom scrollbar voor de terminal */
-.terminal-body::-webkit-scrollbar {
-  width: 6px;
-}
-.terminal-body::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.2);
-}
-.terminal-body::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.1);
-  border-radius: 3px;
-}
-
-.cmd-section {
-  margin-bottom: 1.25rem;
-}
-.cmd-section:last-child {
-  margin-bottom: 0;
-}
-
-.cmd-header {
-  color: var(--accent, #ff0055);
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-  font-size: 0.85rem;
-}
-
-.cmd-line {
-  padding-left: 0.5rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.cmd {
-  color: #00ff88;
-  font-weight: 700;
-}
-
-/* Responsive updates voor de grid */
-@media (max-width: 1024px) {
-  .panel-extras {
-    grid-column: span 1;
-  }
-}
 /* ============================================
-   HAMBURGER BUTTON
+   HAMBURGER BUTTON (ALTIJD AAN)
    ============================================ */
 .hamburger {
-  display: none; /* Wordt zichtbaar gemaakt via je mobiele media-query (meestal met display: flex) */
+  display: flex !important; 
   align-items: center;
   justify-content: center;
-  flex-direction: row; /* Zorg dat het icoon en de tekst netjes naast elkaar staan */
-  gap: 0.5rem; /* Ruimte tussen het icoon en de tekst */
-  width: auto; /* Aangepast van 34px naar auto, zodat de tekst "MENU" erin past */
+  flex-direction: row; 
+  gap: 0.5rem; 
+  width: auto; 
   height: 34px;
   background: transparent;
   border: none;
@@ -751,7 +633,6 @@ nav ul a:hover { color: var(--accent); }
   padding: 0;
 }
 
-/* De toevoeging van de "MENU" tekst */
 .hamburger::after {
   content: "MENU";
   font-family: var(--font-mono, 'Space Mono', monospace);
@@ -761,10 +642,8 @@ nav ul a:hover { color: var(--accent); }
   transition: color 0.2s ease;
 }
 
-/* Kleur van "MENU" verandert bij hover of als hij open staat */
 .hamburger:hover::after,
-.hamburger.open::after,
-.hamburger[aria-expanded="true"]::after {
+.hamburger.open::after {
   color: var(--accent);
 }
 
@@ -783,11 +662,7 @@ nav ul a:hover { color: var(--accent); }
   background: #c8d4e0;
   border-radius: 2px;
   transform-origin: center;
-  transition:
-    transform  0.4s cubic-bezier(0.23, 1, 0.32, 1),
-    opacity    0.2s ease,
-    width      0.3s cubic-bezier(0.23, 1, 0.32, 1),
-    background 0.2s ease;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s ease, width 0.3s cubic-bezier(0.23, 1, 0.32, 1), background 0.2s ease;
 }
 
 .ham-line--top { width: 100%; }
@@ -801,6 +676,7 @@ nav ul a:hover { color: var(--accent); }
 .hamburger.open .ham-line--top { transform: translateY(6px) rotate(45deg); background: var(--accent); width: 100%; }
 .hamburger.open .ham-line--mid { opacity: 0; width: 0; }
 .hamburger.open .ham-line--bot { transform: translateY(-6px) rotate(-45deg); background: var(--accent); width: 100%; }
+
 /* ============================================
    MOBILE NAV OVERLAY
    ============================================ */
@@ -811,15 +687,12 @@ nav ul a:hover { color: var(--accent); }
   z-index: 150;
   pointer-events: none;
   visibility: hidden;
-  background-color: transparent;
-  transition: visibility 0s 0.4s;
   display: flex; align-items: center; justify-content: center;
 }
 
 .mobile-nav.open {
   pointer-events: all;
   visibility: visible;
-  transition: visibility 0s 0s;
 }
 
 .mobile-nav__backdrop {
@@ -847,9 +720,7 @@ nav ul a:hover { color: var(--accent); }
   padding: 2.5rem;
   opacity: 0;
   transform: scale(0.95) translateY(-10px);
-  transition:
-    transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
-    opacity   0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.35s ease;
 }
 
 .mobile-nav.open .mobile-nav__panel { opacity: 1; transform: scale(1) translateY(0); }
@@ -866,10 +737,7 @@ nav ul a:hover { color: var(--accent); }
   letter-spacing: -0.02em;
   opacity: 0;
   transform: translateY(10px);
-  transition:
-    color     0.2s ease,
-    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-    opacity   0.4s ease;
+  transition: color 0.2s ease, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
 }
 
 .mobile-nav__panel a::before {
@@ -882,21 +750,7 @@ nav ul a:hover { color: var(--accent); }
 }
 
 .mobile-nav__panel a:hover { color: var(--accent); }
-
 .mobile-nav.open .mobile-nav__panel a { opacity: 1; transform: translateY(0); }
-.mobile-nav.open .mobile-nav__panel li:nth-child(1) a { transition-delay: 0.1s; }
-.mobile-nav.open .mobile-nav__panel li:nth-child(2) a { transition-delay: 0.16s; }
-.mobile-nav.open .mobile-nav__panel li:nth-child(3) a { transition-delay: 0.22s; }
-.mobile-nav.open .mobile-nav__panel li:nth-child(4) a { transition-delay: 0.28s; }
-
-.mobile-nav__footer {
-  margin-top: 2rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  font-family: var(--font-display);
-}
 
 /* ============================================
    PROJECTS PANEL
@@ -904,24 +758,17 @@ nav ul a:hover { color: var(--accent); }
 .panel-projects { overflow: hidden; }
 
 .proj-list {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0.8rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border2) transparent;
+  gap: 0.6rem;
 }
-.proj-list::-webkit-scrollbar { width: 4px; }
-.proj-list::-webkit-scrollbar-track { background: transparent; }
-.proj-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
 .proj-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 0.8rem 1rem;
+  padding: 1rem 1.2rem;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .proj-card:hover {
@@ -936,7 +783,7 @@ nav ul a:hover { color: var(--accent); }
 
 .proj-meta h3 {
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 800;
   color: #fff;
   white-space: nowrap;
@@ -945,107 +792,91 @@ nav ul a:hover { color: var(--accent); }
   line-height: 1.8;
 }
 
-.proj-version {
-  font-size: 0.6rem; /* Bumped from 0.3rem to prevent illegible micro-text */
-  color: var(--text-muted);
-  letter-spacing: 0.03em;
-  line-height: 1;
-}
-
+.proj-version { font-size: 0.6rem; color: var(--text-muted); }
 .wip-badge {
   font-size: 0.5rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
   padding: 0.2rem 0.45rem;
   border-radius: 6px;
   background: rgba(255, 180, 0, 0.08);
   border: 1px solid rgba(255, 180, 0, 0.35);
   color: var(--warn);
-  flex-shrink: 0;
-  align-self: center;
 }
 .wip-badge.soon { background: rgba(0, 180, 255, 0.08); border-color: rgba(0, 180, 255, 0.35); color: var(--accent2); }
 
-.proj-link { display: flex; align-items: center; color: var(--text-muted); transition: color 0.15s; flex-shrink: 0; }
+.proj-link { display: flex; align-items: center; color: var(--text-muted); }
 .proj-link:hover { color: var(--accent); }
 .proj-link svg { width: 14px; height: 14px; }
-
-.proj-card p { font-size: 0.64rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 0.5rem; }
+.proj-card p { font-size: 0.68rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 0.5rem; }
 .proj-tags { display: flex; gap: 0.25rem; flex-wrap: wrap; }
 
 /* ============================================
-   CONTACT BAR (FOOTER)
+   CONTACT BAR (FOOTER SLUIT NU PERFECT AAN IN DE APP KOLOM)
    ============================================ */
 .contact-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: var(--bar-h);
-  z-index: 100;
-  display: flex;
+  position: relative !important; 
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0 1.5rem;
-  background: rgba(10,12,15,0.97);
+  padding: 1.2rem 1.5rem;
+  gap: 0.4rem 0.8rem;
+  background: var(--surface);
   border-top: 1px solid var(--border);
-  overflow: hidden;
-  white-space: nowrap;
+  margin-top: 0; /* Sluit direct onder de laatste sectie aan */
 }
 
-.contact-label { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; flex-shrink: 0; }
-.contact-bar a { font-size: 0.62rem; color: var(--text-muted); transition: color 0.15s; flex-shrink: 0; letter-spacing: 0.04em; }
-.contact-bar a:hover { color: var(--accent); }
-.bar-sep { color: var(--border2); flex-shrink: 0; font-size: 0.7rem; }
-.bar-copy { margin-left: auto; font-size: 0.58rem; color: var(--border2); flex-shrink: 0; }
+.contact-label { 
+  font-size: 0.6rem; 
+  letter-spacing: 0.12em; 
+  color: var(--text-muted); 
+  text-transform: uppercase; 
+  width: 100%; 
+  margin-bottom: 0.2rem; 
+}
+
+.contact-bar a { 
+  font-size: 0.68rem; 
+  color: var(--text-muted); 
+  transition: color 0.15s; 
+  letter-spacing: 0.02em; 
+}
+
+.contact-bar a:hover { 
+  color: var(--accent); 
+}
+
+.bar-sep { 
+  color: var(--border2); 
+  font-size: 0.7rem; 
+}
+
+.bar-copy { 
+  display: block; 
+  width: 100%; 
+  margin-top: 0.4rem; 
+  font-size: 0.58rem; 
+  color: var(--text-muted); 
+  opacity: 0.6;
+}
+
 .accent { color: var(--accent); }
 
 /* ============================================
-   RESPONSIVE LAYOUT (TABLETS / SMALL LAPTOPS)
+   MEDIA QUERIES (VOOR TELEFOONS)
    ============================================ */
-/*@media (max-width: 900px) {
-  html, body { overflow: auto; height: auto; }
-
-  .dashboard {
-    position: static;
-    margin-top: var(--nav-h);
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding-bottom: 0;
-    height: auto; 
+@media (max-width: 650px) {
+  /* Verwijdert zijkant-borders op telefoons zodat de app de breedte volledig vult */
+  nav, .dashboard {
+    max-width: 100% !important;
+    border-left: none !important;
+    border-right: none !important;
   }
-
-  .panel-col-mid { display: contents; }
-  .panel { min-height: auto; }
-  .panel-hero .hero-inner { padding: 1.2rem; }
-  .hero-inner h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
-  .panel-over .over-inner,
-  .panel-skills .skills-inner { padding: 1rem 1.2rem; }
-  .proj-list { max-height: none; overflow: visible; }
-
-  .contact-bar {
-    position: static;
-    height: auto;
-    flex-wrap: wrap;
-    white-space: normal;
-    overflow: visible;
-    padding: 0.6rem 1rem;
-    gap: 0.4rem 0.7rem;
-  }
-
-  .contact-label { width: 100%; margin-bottom: 0.1rem; }
-  .bar-copy { display: block; width: 100%; margin-top: 0.2rem; font-size: 0.55rem; }
-}*/
-
-/* Consolidated under 768px */
-@media (max-width: 768px) {
-  nav { padding: 0 1rem; }
-  .nav-top { padding: 0; }
-  .nav-tagline, .nav-status, nav ul { display: none !important; }
-  .hamburger { display: flex; }
 }
 
 @media (max-width: 480px) {
   .hero-socials a { width: 28px; height: 28px; }
+  .hero-inner h1 { font-size: 2.2rem; }
 }
 
 /* ============================================
@@ -1061,48 +892,8 @@ nav ul a:hover { color: var(--accent); }
 .panel-hero .hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
 .panel-hero .hero-inner > *:nth-child(3) { animation-delay: 0.3s; }
 .panel-hero .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
-.panel-hero .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
 
 .proj-card { animation: fadeIn 0.4s ease both; }
 .proj-card:nth-child(1) { animation-delay: 0.15s; }
 .proj-card:nth-child(2) { animation-delay: 0.25s; }
 .proj-card:nth-child(3) { animation-delay: 0.35s; }
-.proj-card:nth-child(4) { animation-delay: 0.45s; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-/* ============================================
-   FORCEER MOBIELE INTERFACE & NAVIGATIE OVERAL
-   ============================================ */
-nav, .contact-bar {
-  width: 100% !important;
-  max-width: none !important; /* Haal de limiet van 480px weg */
-  left: 0 !important;
-  right: 0 !important;
-  transform: none !important;
-}
-
-/* Verberg de desktop-navigatie linkjes, status-tekst en tagline */
-.nav-tagline, 
-.nav-status, 
-nav ul { 
-  display: none !important; 
-}
-
-/* Forceer de mobiele indeling voor de nav bar */
-nav {
-  padding: 0 1rem !important;
-}
-
-.nav-top {
-  padding: 0 !important;
-}
-
-/* Toon ALTIJD de mobiele hamburgerknop */
-.hamburger { 
-  display: flex !important; 
-}

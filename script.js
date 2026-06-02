@@ -1,5 +1,5 @@
 /* ============================================
-   DNA CANVAS ANIMATIE (ACHTERGROND)
+   DNA CANVAS ANIMATIE (ACHTERGROND) - GEÜPGRADED
    ============================================ */
 const canvas = document.getElementById('dna-canvas');
 const ctx = canvas.getContext('2d');
@@ -7,25 +7,39 @@ const ctx = canvas.getContext('2d');
 const bases = ['A', 'T', 'G', 'C'];
 const strands = [];
 
-// Fewer strands on mobile for performance
-const isMobile = () => true;
-const STRAND_COUNT_DESKTOP = 14;
-const STRAND_COUNT_MOBILE = 4;
+// Echte mobiele detectie (schermen tot 768px breed)
+const isMobile = () => window.innerWidth <= 768;
 
-// Verander dit (rond regel 15):
+const STRAND_COUNT_DESKTOP = 13;  
+const STRAND_COUNT_MOBILE = 4;    // Perfect aantal voor een gevulde mobiele achtergrond
+
 function getStrandCount() {
-  return STRAND_COUNT_DESKTOP; // Veranderd van isMobile() ? ... naar altijd desktop aantal (8)
+  return isMobile() ? STRAND_COUNT_MOBILE : STRAND_COUNT_DESKTOP;
 }
 
 function initStrands() {
   const count = getStrandCount();
   strands.length = 0;
+  
   for (let i = 0; i < count; i++) {
+    let startX;
+    
+    if (isMobile()) {
+      // UPGRADE: Verdeelt de 4 strengen nu écht perfect evenredig over de mobiele breedte
+      // Ze starten mooi verspreid vanaf 10% tot 90% van de schermbreedte
+      startX = canvas.width * (0.1 + (i / (count - 1)) * 0.8);
+    } else {
+      startX = (canvas.width / count) * i + (canvas.width / count / 2);
+    }
+
     strands.push({
-      x: (canvas.width / count) * i + (canvas.width / count / 2),
+      x: startX,
       offset: Math.random() * Math.PI * 2,
-      speed: 0.002 + Math.random() * 0.002,
-      amplitude: isMobile() ? 20 + Math.random() * 25 : 30 + Math.random() * 40,
+      // UPGRADE: Mobiel golft extra rustig en traag (0.001) voor een chique uitstraling
+      speed: isMobile() ? 0.001 + Math.random() * 0.001 : 0.002 + Math.random() * 0.002, 
+      
+      // UPGRADE: Grote amplitude (45 tot 65px) op mobiel zodat de strengen prachtig wijd uitwaieren
+      amplitude: isMobile() ? 45 + Math.random() * 20 : 30 + Math.random() * 40,
     });
   }
 }
@@ -36,8 +50,10 @@ function resizeCanvas() {
   initStrands();
 }
 
+// Direct starten bij inladen
 resizeCanvas();
 
+// Debounce op het resizen van het scherm (voorkomt lag tijdens slepen)
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
@@ -47,11 +63,12 @@ window.addEventListener('resize', () => {
 let tick = 0;
 let animFrameId;
 
-// Pause animation when tab is hidden (saves battery on mobile)
+// UPGRADE: Veiligheid ingebouwd tegen dubbele loops bij het wisselen van tabbladen (bespaart batterij)
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     cancelAnimationFrame(animFrameId);
   } else {
+    cancelAnimationFrame(animFrameId); // Reset eventuele actieve frames
     drawDNA();
   }
 });
@@ -69,24 +86,27 @@ function drawDNA() {
       const x1 = strand.x + wave;
       const x2 = strand.x - wave;
 
+      // De verbindingslijn (ladder) tussen de DNA-bolletjes
       ctx.beginPath();
       ctx.moveTo(x1, y);
       ctx.lineTo(x2, y);
-      ctx.strokeStyle = 'rgba(0, 229, 160, 0.25)';
+      ctx.strokeStyle = 'rgba(0, 229, 160, 0.23)';
       ctx.lineWidth = 1;
       ctx.stroke();
 
+      // Blauwe DNA bolletjes (Klantzijde 1)
       ctx.beginPath();
       ctx.arc(x1, y, 3, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(0, 180, 255, 0.6)';
       ctx.fill();
 
+      // Groene DNA bolletjes (Klantzijde 2)
       ctx.beginPath();
       ctx.arc(x2, y, 3, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(0, 229, 160, 0.6)';
       ctx.fill();
 
-      // Skip letter labels on mobile for performance
+      // Letters (A, T, G, C) alleen op desktop renderen voor maximale prestaties op mobiel
       if (!isMobile() && row % 3 === 0) {
         const base = bases[Math.floor((row + strand.x) % 4)];
         ctx.font = '9px Space Mono, monospace';
@@ -100,6 +120,7 @@ function drawDNA() {
   animFrameId = requestAnimationFrame(drawDNA);
 }
 
+// Start de animatiecyclus
 drawDNA();
 
 /* ============================================
