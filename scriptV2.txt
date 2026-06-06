@@ -75,32 +75,52 @@ document.addEventListener('visibilitychange', () => {
 function drawDNA() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  // Grotere stappen op mobiel (45px ipv 28px) vermindert de rekenlast met 40%
   const STEP = isMobile() ? 45 : 28;
-  const rows = Math.floor(canvas.height / STEP) + 3;
+  const rows = Math.floor(canvas.height / STEP) + 2;
 
   strands.forEach(strand => {
-    const yOffset = (tick * strand.speed * 200) % STEP;
-    
-    for (let row = -1; row < rows; row++) {
-      const y = row * STEP - yOffset;
+    for (let row = 0; row < rows; row++) {
+      const y = row * STEP - (tick * strand.speed * 1000 % (STEP));
       const wave = Math.sin(row * 0.35 + strand.offset + tick * strand.speed * 60) * strand.amplitude;
       const x1 = strand.x + wave;
       const x2 = strand.x - wave;
 
+      // De verbindingslijn (ladder) tussen de DNA-bolletjes
       ctx.beginPath();
       ctx.moveTo(x1, y);
       ctx.lineTo(x2, y);
-      ctx.strokeStyle = 'rgba(0, 229, 160, 0.35)';
+      ctx.strokeStyle = 'rgba(0, 229, 160, 0.35)'; // Felle lijn voor contrast
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      ctx.beginPath(); ctx.arc(x1, y, 3.5, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 180, 255, 0.95)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(x1, y, 7, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 180, 255, 0.25)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(x2, y, 3.5, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 229, 160, 0.95)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(x2, y, 7, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 229, 160, 0.25)'; ctx.fill();
+      // Blauwe DNA bolletjes (Fel)
+      ctx.beginPath();
+      ctx.arc(x1, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 180, 255, 0.95)';
+      ctx.fill();
 
-      if (!isMobile() && row % 3 === 0 && y > 0) {
-        const base = bases[Math.abs(Math.floor((row + strand.x) % 4))];
+      // Blauwe Namaak Neon Glow (Lichte, grotere cirkel erachter)
+      ctx.beginPath();
+      ctx.arc(x1, y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 180, 255, 0.25)';
+      ctx.fill();
+
+      // Groene DNA bolletjes (Fel)
+      ctx.beginPath();
+      ctx.arc(x2, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 229, 160, 0.95)';
+      ctx.fill();
+
+      // Groene Namaak Neon Glow erachter
+      ctx.beginPath();
+      ctx.arc(x2, y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 229, 160, 0.25)';
+      ctx.fill();
+
+      // Letters (A, T, G, C) alleen op desktop voor maximale prestaties
+      if (!isMobile() && row % 3 === 0) {
+        const base = bases[Math.floor((row + strand.x) % 4)];
         ctx.font = 'bold 9px Space Mono, monospace';
         ctx.fillStyle = 'rgba(0, 229, 160, 0.6)';
         ctx.fillText(base, x1 + 6, y + 3);
@@ -498,26 +518,31 @@ function applyLang(lang) {
   const t = translations[lang];
   if (!t) return;
 
+  // Algemene teksten
   if (document.querySelector('.hero-sup')) document.querySelector('.hero-sup').textContent = t['hero-sup'];
   if (document.querySelector('.hero-sub')) document.querySelector('.hero-sub').textContent = t['hero-sub'];
   if (document.querySelector('#projBtn')) document.querySelector('#projBtn').textContent  = t['btn-primary'];
   if (document.querySelector('.over-bio')) document.querySelector('.over-bio').innerHTML   = t['over-bio'];
   if (document.querySelector('.status-text')) document.querySelector('.status-text').textContent = t['status'];
 
+  // Panel labels (00 t/m 04)
   const labels = document.querySelectorAll('.panel-label');
   labels.forEach((el, i) => {
     const key = `panel-0${i}`;
     if (t[key]) el.textContent = t[key];
   });
 
+  // Stat chips
   document.querySelectorAll('.chip-val').forEach((el, i) => {
     if (t[`chip-${i}`]) el.textContent = t[`chip-${i}`];
   });
 
+  // Project descriptions
   document.querySelectorAll('.proj-card p').forEach((el, i) => {
     if (t[`proj-desc-${i}`]) el.textContent = t[`proj-desc-${i}`];
     
   })
+  // Specifieke updates voor de nieuwe projectkaart (index 4)
   if (document.querySelector('.proj-card:nth-of-type(5) .proj-version')) {
     document.querySelector('.proj-card:nth-of-type(5) .proj-version').textContent = t['proj-status-4'];
   }
@@ -525,14 +550,22 @@ function applyLang(lang) {
     document.querySelector('.proj-card:nth-of-type(5) .wip-badge').textContent = t['proj-badge-4'];
   };
   
+
+  // Desktop nav links (0 t/m 4)
   document.querySelectorAll('nav ul a').forEach((el, i) => {
     if (t[`nav-${i}`]) el.textContent = t[`nav-${i}`];
   });
 
+  // Mobile nav links (0 t/m 4)
   document.querySelectorAll('.mobile-nav__panel a').forEach((el, i) => {
     if (t[`mob-${i}`]) el.textContent = t[`mob-${i}`];
   });
 
+  /* ============================================
+     AeroForge & Terminal (Gekoppeld aan jouw HTML)
+     ============================================ */
+  
+  // Server Info Box
   if (document.querySelector('.server-status-pill')) {
     document.querySelector('.server-status-pill').textContent = t['af-status'];
   }
@@ -546,6 +579,7 @@ function applyLang(lang) {
     document.querySelector('.server-description').textContent = t['af-desc'];
   }
   
+  // Download sectie
   if (document.querySelector('.download-label')) {
     document.querySelector('.download-label').textContent = t['af-pack-title'];
   }
@@ -556,10 +590,12 @@ function applyLang(lang) {
     document.querySelector('.btn-subtext').textContent = t['af-download-sub'];
   }
 
+  // Terminal Header
   if (document.querySelector('.terminal-title')) {
     document.querySelector('.terminal-title').textContent = t['af-terminal-user'];
   }
 
+  // Terminal Commando's & Categorieën
   const cmdHeaders = document.querySelectorAll('.cmd-header');
   if (cmdHeaders.length >= 3) {
     cmdHeaders[0].textContent = t['af-cat-general'];
@@ -567,6 +603,7 @@ function applyLang(lang) {
     cmdHeaders[2].textContent = t['af-cat-minecraft'];
   }
 
+  // Loop door alle cmd-lines om de beschrijvingen te vertalen
   const cmdLines = document.querySelectorAll('.cmd-line');
   
   const cmdKeys = [
@@ -591,10 +628,12 @@ function applyLang(lang) {
     }
   });
 
+  // Active language button classes toggelen
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
+  // Marquee real-time updaten bij taalwissel
   const track = document.querySelector('.marquee-track');
   if (track && t.marquee) {
     const html = [...t.marquee, ...t.marquee]
@@ -608,6 +647,7 @@ function applyLang(lang) {
   }
 }
 
+// Event listeners toevoegen aan taalknoppen
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
@@ -625,7 +665,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnZoomIn = document.getElementById('zoom-in');
   const btnZoomOut = document.getElementById('zoom-out');
 
+  // Voer de code alleen uit als beide knoppen in de HTML worden gevonden
   if (btnZoomIn && btnZoomOut) {
+    
+    // Klikken op de plus-knop (+)
     btnZoomIn.addEventListener('click', () => {
       if (currentZoom < MAX_ZOOM) {
         currentZoom += ZOOM_STEP;
@@ -633,6 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Klikken op de min-knop (-)
     btnZoomOut.addEventListener('click', () => {
       if (currentZoom > MIN_ZOOM) {
         currentZoom -= ZOOM_STEP;
@@ -641,182 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
   } else {
+    // Geeft een waarschuwing in de F12-console als de HTML-IDs niet overeenkomen
     console.warn("[System] Zoom-knoppen niet gevonden. Controleer of de IDs 'zoom-in' en 'zoom-out' correct zijn ingesteld.");
   }
-});
-
-/* ============================================
-   SIDEBAR MINIGAME: SPLIT PONG (AI VS AI + MANUAL OVERRIDE)
-   ============================================ */
-document.addEventListener('DOMContentLoaded', () => {
-  const canvasL = document.getElementById('pong-left');
-  const canvasR = document.getElementById('pong-right');
-  
-  if (!canvasL || !canvasR) return;
-
-  const ctxL = canvasL.getContext('2d');
-  const ctxR = canvasR.getContext('2d');
-
-  // Zet vaste resoluties voor de canvassen
-  const w = 220;
-  const h = 450;
-  canvasL.width = w; canvasL.height = h;
-  canvasR.width = w; canvasR.height = h;
-
-  // Virtuele totale breedte (inclusief de 650px lege ruimte van je portfolio)
-  const gap = 650 + 40; // Dashboard breedte + marges
-  const totalWidth = w + gap + w;
-
-  // Game objecten
-  const paddleWidth = 8;
-  const paddleHeight = 60;
-  
-  const ball = {
-    x: totalWidth / 2,
-    y: h / 2,
-    vx: 4,
-    vy: 3,
-    radius: 5,
-    speed: 5
-  };
-
-  const p1 = { x: 10, y: h / 2 - paddleHeight / 2, score: 0, isManual: false };
-  const p2 = { x: totalWidth - 10 - paddleWidth, y: h / 2 - paddleHeight / 2, score: 0, isManual: false };
-
-  // Muisbesturing triggers per zijbalk
-  canvasL.addEventListener('mousemove', (e) => {
-    p1.isManual = true;
-    const rect = canvasL.getBoundingClientRect();
-    p1.y = e.clientY - rect.top - paddleHeight / 2;
-  });
-
-  canvasR.addEventListener('mousemove', (e) => {
-    p2.isManual = true;
-    const rect = canvasR.getBoundingClientRect();
-    p2.y = e.clientY - rect.top - paddleHeight / 2;
-  });
-
-  // Reset als de muis de schermen verlaat (terug naar AI)
-  canvasL.addEventListener('mouseleave', () => p1.isManual = false);
-  canvasR.addEventListener('mouseleave', () => p2.isManual = false);
-
-  function resetBall() {
-    ball.x = totalWidth / 2;
-    ball.y = h / 2;
-    ball.vx = (Math.random() > 0.5 ? 1 : -1) * 4;
-    ball.vy = (Math.random() * 2 - 1) * 3;
-    ball.speed = 5;
-  }
-
-  function update() {
-    // Beweeg de bal
-    ball.x += ball.vx;
-    ball.y += ball.vy;
-
-    // Kaatsen tegen boven- en onderkant
-    if (ball.y - ball.radius < 0) {
-      ball.y = ball.radius;
-      ball.vy = -ball.vy;
-    } else if (ball.y + ball.radius > h) {
-      ball.y = h - ball.radius;
-      ball.vy = -ball.vy;
-    }
-
-    // AI Volg-logica (als speler niet handmatig stuurt)
-    const aiSpeed = 3.5;
-    if (!p1.isManual) {
-      const targetY = ball.y - paddleHeight / 2;
-      p1.y += (targetY - p1.y) * 0.1;
-    }
-    if (!p2.isManual) {
-      const targetY = ball.y - paddleHeight / 2;
-      p2.y += (targetY - p2.y) * 0.1;
-    }
-
-    // Beperk paddles binnen het scherm
-    p1.y = Math.max(0, Math.min(h - paddleHeight, p1.y));
-    p2.y = Math.max(0, Math.min(h - paddleHeight, p2.y));
-
-    // Check collisions met paddles
-    // Linker paddle
-    if (ball.vx < 0 && ball.x < p1.x + paddleWidth && ball.x > p1.x) {
-      if (ball.y > p1.y && ball.y < p1.y + paddleHeight) {
-        ball.vx = -ball.vx;
-        ball.speed += 0.2;
-      }
-    }
-    // Rechter paddle
-    if (ball.vx > 0 && ball.x > p2.x && ball.x < p2.x + paddleWidth) {
-      if (ball.y > p2.y && ball.y < p2.y + paddleHeight) {
-        ball.vx = -ball.vx;
-        ball.speed += 0.2;
-      }
-    }
-
-    // Punten scoren
-    if (ball.x < 0) {
-      p2.score++;
-      resetBall();
-    } else if (ball.x > totalWidth) {
-      p1.score++;
-      resetBall();
-    }
-  }
-
-  function draw() {
-    // Maak beide schermen leeg
-    ctxL.clearRect(0, 0, w, h);
-    ctxR.clearRect(0, 0, w, h);
-
-    // Teken Cyberpunk Grid/Stippellijnen op achtergrond
-    ctxL.strokeStyle = 'rgba(28, 36, 48, 0.4)';
-    ctxR.strokeStyle = 'rgba(28, 36, 48, 0.4)';
-    ctxL.lineWidth = 1; ctxR.lineWidth = 1;
-    for(let i=0; i<h; i+=20) {
-      ctxL.strokeRect(0, i, w, 1);
-      ctxR.strokeRect(0, i, w, 1);
-    }
-
-    // Kleuren instellen (Matrix groen & Cyaan blauw)
-    const accentGreen = '#00e5a0';
-    const accentBlue = '#00b4ff';
-
-    // Links tekenen
-    ctxL.fillStyle = accentGreen;
-    ctxL.fillRect(p1.x, p1.y, paddleWidth, paddleHeight); // Paddle 1
-    ctxL.font = 'bold 20px "Space Mono"';
-    ctxL.fillStyle = 'rgba(74, 92, 110, 0.3)';
-    ctxL.fillText(p1.score, w - 40, 40); // Score links
-
-    // Rechts tekenen
-    ctxR.fillStyle = accentBlue;
-    ctxR.fillRect(p2.x - (totalWidth - w), p2.y, paddleWidth, paddleHeight); // Paddle 2
-    ctxR.font = 'bold 20px "Space Mono"';
-    ctxR.fillStyle = 'rgba(74, 92, 110, 0.3)';
-    ctxR.fillText(p2.score, 30, 40); // Score rechts
-
-    // Teken de bal op het juiste scherm gebaseerd op zijn virtuele X positie
-    ctxL.fillStyle = '#ffffff';
-    ctxR.fillStyle = '#ffffff';
-    
-    if (ball.x <= w) {
-      // Bal is op het linker scherm
-      ctxL.beginPath();
-      ctxL.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-      ctxL.fill();
-    } else if (ball.x >= totalWidth - w) {
-      // Bal is op het rechter scherm
-      ctxR.beginPath();
-      ctxR.arc(ball.x - (totalWidth - w), ball.y, ball.radius, 0, Math.PI * 2);
-      ctxR.fill();
-    }
-  }
-
-  function loop() {
-    update();
-    draw();
-    requestAnimationFrame(loop);
-  }
-
-  loop();
 });

@@ -9,15 +9,6 @@
 </head>
 <body>
 
-  <div class="version-bar">
-    <span class="version-label">PORTFOLIO_VER:</span>
-    <div class="version-buttons">
-      <a href="versie-1.html" class="v-btn" title="Volledig RAW AI, geen aanpassingen">[1] RAW_AI</a>
-      <a href="index.html" class="v-btn active" title="AI Tweaked (huidige versie)">[2] AI_TWEAKED</a>
-      <a href="versie-3.html" class="v-btn" title="Geen AI, puur handwerk">[3] HUMAN_ONLY</a>
-    </div>
-  </div>
-
   <div class="dna-bg" aria-hidden="true">
     <canvas id="dna-canvas"></canvas>
   </div>
@@ -134,13 +125,7 @@
       </div>
       <div class="hero-inner">
         <p class="hero-sup">EXAMENS VOORBIJ!</p>
-<h1>
-  <span class="glitch" style="color: #ffffff;" data-text="Mert_">Mert_</span><span class="glitch" style="color: var(--accent);" data-text="Can">Can</span>
-  
-  <br/>
-  
-  <span class="glitch" style="color: var(--accent);" data-text="B%@#r">B%@#r</span><span class="glitch" style="color: #ffffff;" data-text="_i9!i">_i9!i</span>
-</h1>
+        <h1>Mert_Can<br/><span class="accent glitch" data-text="B%@#r_i9!i">B%@#r_i9!i</span></h1>
         <p class="hero-sub">U saw nothing...</p>
         <div class="hero-buttons">
           <a href="#projecten" class="btn-primary" id="projBtn">Bekijk projecten</a>
@@ -410,12 +395,7 @@
     <a href="https://nl.fiverr.com/datawithmert" target="_blank">fiverr</a>
     <span class="bar-copy">© 2026 Mert Can</span>
   </footer>
-<div class="side-game left-game">
-  <canvas id="pong-left"></canvas>
-</div>
-<div class="side-game right-game">
-  <canvas id="pong-right"></canvas>
-</div>
+
   <script src="script.js"></script>
 </body>
 </html>

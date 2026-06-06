@@ -15,7 +15,7 @@
   --warn: #ffb400;
   --font-mono: 'Space Mono', monospace;
   --font-display: 'Syne', sans-serif;
-  --nav-h: 90px;
+  --nav-h: 84px;
 }
 
 *, *::before, *::after { 
@@ -26,7 +26,7 @@
 
 html, body {
   min-height: 100%;
-  overflow-y: auto;
+  overflow-y: auto; /* Zorgt voor een natuurlijke, soepele scroll */
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-mono);
@@ -38,66 +38,14 @@ a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
 /* ============================================
-   VERSION BAR (DEV PORTFOLIO LOOK)
-   ============================================ */
-.version-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: var(--bg);
-  border-bottom: 1px dashed var(--accent);
-  z-index: 200;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.4rem 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  gap: 1rem;
-}
-
-.version-label {
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-}
-
-.version-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.v-btn {
-  padding: 0.2rem 0.6rem;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  background: var(--surface2);
-  transition: all 0.2s ease;
-}
-
-.v-btn:hover {
-  border-color: var(--accent2);
-  color: var(--accent2);
-}
-
-.v-btn.active {
-  color: #000;
-  background: var(--accent);
-  border-color: var(--accent);
-  font-weight: bold;
-}
-
-/* ============================================
    DNA BACKGROUND & OVERLAYS
    ============================================ */
-/* 1. Het DNA-canvas staat vast op de achtergrond */
 .dna-bg {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
 }
 #dna-canvas { width: 100%; height: 100%; }
 
@@ -106,10 +54,13 @@ ul { list-style: none; }
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background-image: 
-    linear-gradient(rgba(0, 229, 160, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 229, 160, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
 }
 
 /* ============================================
@@ -118,10 +69,10 @@ ul { list-style: none; }
 nav {
   position: fixed;
   width: 100% !important;
-  max-width: 650px !important;
+  max-width: 650px !important; /* Gelijk aan de breedte van de app-kolom */
   left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: 32px; /* Dit is de hoogte van je version-bar inclusief padding */
+  transform: translateX(-50%) !important; /* Centreert de balk netjes op PC */
+  top: 0;
   height: var(--nav-h);
   z-index: 160;
   background: rgba(10, 12, 15, 0.96);
@@ -135,29 +86,6 @@ nav {
   border-right: 1px solid var(--border);
   overflow: hidden;
 }
-
-.dashboard {
-  position: relative !important;
-  /* Schuift de content perfect naar beneden op basis van de nieuwe hoogte + version-bar */
-  margin: calc(var(--nav-h) + 32px) auto 2rem auto; 
-  width: 100%;                   
-  max-width: 650px; 
-  z-index: 10;
-  display: flex !important;                 
-  flex-direction: column !important;        
-  gap: 0 !important;
-  background: transparent !important; /* Blijft transparant zodat panelen hun eigen achtergrond bepalen */
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-}
-
-.panel-col-mid {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1px;
-  background: var(--border);
-}
-
 
 .nav-top {
   flex: 1;
@@ -211,6 +139,7 @@ nav {
   margin-top: -4px;
 }
 
+/* Permanent verborgen desktop-elementen voor mobiele structuur */
 .nav-tagline,
 .nav-status,
 nav ul {
@@ -229,17 +158,17 @@ nav ul {
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   white-space: nowrap;
   animation: marquee 8s linear infinite;
-  height: 50%;
+  height: 100%;
   will-change: transform;
-  font-size: 0.85rem; 
-  padding: 0rem 0; 
+  font-size: 0.85rem; /* Verander dit als er eerst px stond */
+  padding: 0.5rem 0;  /* Maakt ook de hoogte van de balk schaalbaar */
 }
 
 .marquee-track span {
-  font-size: 1rem;
+  font-size: 0.55rem;
   letter-spacing: 0.2em;
   color: var(--text-muted);
   font-family: var(--font-mono);
@@ -284,22 +213,40 @@ nav ul {
 }
 
 /* ============================================
+   DASHBOARD LAYOUT (GECENTREERDE APP COLUMN)
+   ============================================ */
+.dashboard {
+  position: relative !important;
+  margin: var(--nav-h) auto 2rem auto; /* Ruimte boven vanaf nav, en nette marge onderaan */
+  width: 100%;                   
+  max-width: 650px; /* Houdt de website compact en oogvriendelijk op laptops */
+  z-index: 10;
+  display: flex !important;                 
+  flex-direction: column !important;        
+  gap: 0 !important;
+  background: transparent !important;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+/* Middelste kolomgroep gedraagt zich als flex-kolom */
+.panel-col-mid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px;
+  background: var(--border);
+}
+
+/* ============================================
    PANELS BASE CONFIG
    ============================================ */
 .panel {
-  background: var(--bg) !important;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   position: relative;
   min-height: auto !important;
   border-bottom: 1px solid var(--border);
-  border-left: 2px solid transparent;
-  transition: border-color 0.3s ease;
-  z-index: 1;
-}
-
-.panel:hover {
-  border-left: 2px solid var(--accent);
 }
 
 .panel-header {
@@ -330,7 +277,7 @@ nav ul {
    HERO PANEL
    ============================================ */
 .panel-hero {
-  background: var(--bg) !important;
+  background: transparent;
   box-shadow: none;
 }
 
@@ -341,18 +288,7 @@ nav ul {
   gap: 0.8rem;
   flex: 1;
   overflow: hidden;
-  background: var(--bg) !important;
-}
-
-/* ============================================
-   THE OPEN WINDOW: DNA ALLEEN BIJ REVEAL VISIBLE
-   ============================================ */
-.panel-hero:has(.hero-inner.reveal.visible) {
-  background: transparent !important;
-}
-
-.panel-hero .hero-inner.reveal.visible {
-  background: transparent !important;
+  background: transparent;
 }
 
 .hero-sup {
@@ -368,7 +304,7 @@ nav ul {
   font-size: clamp(2rem, 5vw, 3.2rem); 
   line-height: 0.95;
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: #fff;
 }
 
 .hero-sub { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
@@ -410,8 +346,7 @@ nav ul {
 .hero-socials { display: flex; gap: 0.5rem; margin-top: 0.2rem; flex-wrap: wrap; }
 .hero-socials a {
   display: flex; align-items: center; justify-content: center;
-  width: 2.5rem; 
-  height: 2.5rem;
+  width: 34px; height: 34px;
   border: 1px solid var(--border2);
   border-radius: 4px;
   background: var(--surface);
@@ -425,82 +360,30 @@ nav ul {
 }
 .hero-socials svg { width: 14px; height: 14px; }
 
-/* ============================================
-   CLEAN & TIGHT CYBERPUNK GLITCH EFFECT (ONE-SHOT FLITSER)
-   ============================================ */
-.glitch {
-  position: relative;
-  display: inline-block;
-  letter-spacing: -0.03em;
-}
-
-/* De twee verborgen lagen die de pure cyber-flitsen veroorzaken */
-.glitch::before, 
-.glitch::after {
+/* Glitch Effect */
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after {
   content: attr(data-text);
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
+  top: 0; left: 0;
+  color: var(--accent);
   opacity: 0;
 }
-
-/* Cyaan/Blauwe glitch laag die door de tekst snijdt */
-.glitch::before {
-  color: var(--accent2); /* #00b4ff */
-  text-shadow: -2px 0 rgba(0, 180, 255, 0.5);
-}
-
-/* Diepe neon-groene glitch laag voor extra diepte (GEEN ORANJE) */
-.glitch::after {
-  color: #00ff9d; /* Felle Matrix groen */
-  text-shadow: 2px 0 rgba(0, 255, 157, 0.5);
-}
-
-/* HOVER TRIGGERS: Door 'infinite' te verwijderen en te vervangen door 
-   '1 forward' flitst de glitch nu exact één keer kort en stopt dan!
-*/
-.glitch:hover {
-  animation: glitch-skew-clean 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1 forwards;
-}
-
 .glitch:hover::before {
-  opacity: 1;
-  animation: glitch-slice-clean-1 0.18s steps(2, end) 1 forwards;
+  animation: glitch1 0.3s steps(2) forwards;
+  color: var(--accent2);
+  clip-path: polygon(0 0,100% 0,100% 45%,0 45%);
+  transform: translate(-2px, -1px);
+  opacity: 0.8;
 }
-
 .glitch:hover::after {
-  opacity: 1;
-  animation: glitch-slice-clean-2 0.18s steps(2, end) 1 forwards;
+  animation: glitch2 0.3s steps(2) 0.05s forwards;
+  color: var(--warn);
+  clip-path: polygon(0 55%,100% 55%,100% 100%,0 100%);
+  transform: translate(2px, 1px);
+  opacity: 0.8;
 }
 
-/* ============================================
-   SHORT-BURST GLITCH ANIMATIONS (STOPS AUTOMATICALLY)
-   ============================================ */
-
-/* Korte, snelle horizontale snede die direct naar een reset (0%) springt */
-@keyframes glitch-slice-clean-1 {
-  0%   { clip-path: inset(40% 0 30% 0); transform: translate(-3px, -1px) skew(2deg); }
-  50%  { clip-path: inset(10% 0 85% 0); transform: translate(2px, 1px) skew(-3deg); }
-  90%  { clip-path: inset(85% 0 5% 0); transform: translate(-1px, 2px) skew(1deg); }
-  100% { clip-path: inset(0 0 0 0); transform: translate(0, 0) skew(0deg); opacity: 0; }
-}
-
-@keyframes glitch-slice-clean-2 {
-  0%   { clip-path: inset(70% 0 10% 0); transform: translate(3px, 1px) skew(-2deg); }
-  50%  { clip-path: inset(5% 0 75% 0); transform: translate(-2px, -1px) skew(3deg); }
-  90%  { clip-path: inset(33% 0 40% 0); transform: translate(1px, -2px) skew(-1deg); }
-  100% { clip-path: inset(0 0 0 0); transform: translate(0, 0) skew(0deg); opacity: 0; }
-}
-
-/* De subtiele trilling van de basistekst die ook direct herstelt */
-@keyframes glitch-skew-clean {
-  0%   { transform: skew(-2deg) translateX(-1px); }
-  50%  { transform: skew(2deg) translateX(1px); }
-  100% { transform: skew(0deg) translateX(0); }
-}
 /* ============================================
    OVER MIJ PANEL
    ============================================ */
@@ -730,7 +613,9 @@ nav ul {
   line-height: 1.6;
   color: #a9b1d6;
 }
-
+/* ============================================
+   NAV NAVIGATION LINKS (DESKTOP)
+   ============================================ */
 .nav-right ul {
   display: flex;
   gap: 1.5rem;
@@ -740,26 +625,28 @@ nav ul {
   align-items: center;
 }
 
+/* De daadwerkelijke linkjes: over, skills, projecten, etc. */
 .nav-right ul li a {
   font-family: 'Space Mono', monospace;
-  font-size: 0.9rem; 
-  color: #a9b1d6; 
+  font-size: 0.9rem; /* Gebruik rem zodat dit netjes meezoemt */
+  color: #a9b1d6; /* Zachte cyberpunk-tekstkleur */
   text-decoration: none;
   text-transform: lowercase;
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
+/* Hover-effect die matcht met je contactbalk */
 .nav-right ul li a:hover {
-  color: #00ff9d; 
+  color: #00ff9d; /* Felle Matrix/Neon groen */
   text-shadow: 0 0 8px rgba(0, 255, 157, 0.5);
 }
 
+/* Zorgt dat op mobiel de platte lijst verdwijnt en de hamburger overblijft */
 @media (max-width: 768px) {
   .nav-right ul {
     display: none !important;
   }
 }
-
 /* ============================================
    HAMBURGER BUTTON (ALTIJD AAN)
    ============================================ */
@@ -770,7 +657,7 @@ nav ul {
   flex-direction: row; 
   gap: 0.5rem; 
   width: auto; 
-  height: 2.5rem;
+  height: 34px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -1087,45 +974,6 @@ nav ul {
 .zoom-btn:active {
   transform: scale(0.95);
 }
-/* ============================================
-   SIDEBAR MINIGAME CHASSIS (PC ONLY)
-   ============================================ */
-.side-game {
-  position: fixed;
-  top: calc(var(--nav-h) + 40px); /* Netjes uitgelijnd onder je navbar */
-  width: 220px;
-  height: 450px;
-  background: var(--bg2);
-  border: 1px dashed var(--border2);
-  border-radius: 4px;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-/* Bereken de posities op basis van je gecentreerde 650px dashboard */
-.left-game {
-  right: calc(50% + 325px + 20px); /* 50% + helft dashboard + 20px marge */
-}
-
-.right-game {
-  left: calc(50% + 325px + 20px);
-}
-
-.side-game canvas {
-  width: 100%;
-  height: 100%;
-  background: #0d1016;
-}
-
-/* Verberg de game op kleinere schermen/tablets waar geen ruimte is */
-@media (max-width: 1150px) {
-  .side-game {
-    display: none !important;
-  }
-}
 
 /* ============================================
    MEDIA QUERIES (VOOR TELEFOONS)
@@ -1133,6 +981,8 @@ nav ul {
 @media (max-width: 650px) {
   nav, .dashboard {
     max-width: 100% !important;
+    border-left: none !important;
+    border-right: none !important;
   }
   .zoom-controls {
     margin-left: 0.2rem;
@@ -1145,7 +995,7 @@ nav ul {
 }
 
 @media (max-width: 480px) {
-  .hero-socials a { width: 2.2rem; height: 2.2rem; }
+  .hero-socials a { width: 28px; height: 28px; }
   .hero-inner h1 { font-size: 2.2rem; }
 }
 
@@ -1167,3 +1017,4 @@ nav ul {
 .proj-card:nth-child(1) { animation-delay: 0.15s; }
 .proj-card:nth-child(2) { animation-delay: 0.25s; }
 .proj-card:nth-child(3) { animation-delay: 0.35s; }
+
