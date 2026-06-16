@@ -662,8 +662,10 @@ document.addEventListener('DOMContentLoaded', () => {
         currentZoom += ZOOM_STEP;
         htmlElement.style.fontSize = `${currentZoom}%`;
         updateZoomDisplay();
-        // Controleer na een korte delay of side-games nog passen
-        setTimeout(checkSideGames, 100);
+        setTimeout(() => {
+          checkSideGames();
+          window.dispatchEvent(new Event('resize'));
+        }, 100);
       }
     });
 
@@ -672,8 +674,10 @@ document.addEventListener('DOMContentLoaded', () => {
         currentZoom -= ZOOM_STEP;
         htmlElement.style.fontSize = `${currentZoom}%`;
         updateZoomDisplay();
-        // Controleer na een korte delay of side-games weer passen
-        setTimeout(checkSideGames, 100);
+        setTimeout(() => {
+          checkSideGames();
+          window.dispatchEvent(new Event('resize'));
+        }, 100);
       }
     });
     
@@ -689,8 +693,36 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============================================
-   SIDEBAR MINIGAME: SPLIT PONG (AI VS AI + MANUAL OVERRIDE)
+   DYNAMIC DASHBOARD MARGIN (ZOOM SAFE)
    ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  function updateDashboardMargin() {
+    const nav = document.querySelector('nav');
+    const dashboard = document.querySelector('.dashboard');
+    if (nav && dashboard) {
+      const navHeight = nav.offsetHeight;
+      dashboard.style.marginTop = `${navHeight + 24}px`;
+    }
+    
+    // Update side-game top position
+    const navEl = document.querySelector('nav');
+    const sideGames = document.querySelectorAll('.side-game');
+    if (navEl) {
+      const navBottom = navEl.getBoundingClientRect().bottom;
+      sideGames.forEach(game => {
+        game.style.top = `${navBottom + 8}px`;
+      });
+    }
+  }
+
+  // Run op load en bij resize/zoom
+  updateDashboardMargin();
+  window.addEventListener('resize', updateDashboardMargin);
+
+  // Run ook bij zoom knoppen (via MutationObserver op fontSize)
+  const observer = new MutationObserver(updateDashboardMargin);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+});
 document.addEventListener('DOMContentLoaded', () => {
   const canvasL = document.getElementById('pong-left');
   const canvasR = document.getElementById('pong-right');

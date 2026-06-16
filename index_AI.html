@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mert Can — Portfolio v1</title>
+  <link rel="stylesheet" href="stykev1.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="index.html" class="topbar-back">← terug naar v2</a>
+    <span class="topbar-version">v1 // AI-generated</span>
+    <nav class="topbar-nav">
+      <a href="#about">over</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projecten</a>
+      <a href="#server">server</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="hero-greeting" id="typewriter"></p>
+      <h1 class="hero-name">
+        <span class="name-line">Mert</span>
+        <span class="name-line accent-line">Can</span>
+      </h1>
+      <p class="hero-tagline">Developer · Modder · Creator</p>
+      <p class="hero-status">
+        <span class="status-dot"></span>
+        Examens voorbij — beschikbaar voor projecten
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="cta-btn">Projecten bekijken ↓</a>
+        <a href="https://github.com/KaasRijkeTurk" target="_blank" class="cta-btn cta-ghost">GitHub</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Over mij</h2>
+        <div class="header-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>18 jaar oud. Ik bouw dingen omdat ik het leuk vind. Mods, websites, scripts — alles wat code vereist trekt mijn aandacht. Ik zoek <strong>ervaring</strong> en <strong>connecties</strong>, en ik leer van elk project.</p>
+          <p>Wanneer ik niet aan een project werk, ben ik waarschijnlijk een CTF aan het cracken, een Minecraft-mod aan het bouwen, of een nieuwe technologie aan het verkennen.</p>
+        </div>
+        <div class="about-cards">
+          <div class="info-card">
+            <span class="card-icon">🎓</span>
+            <span class="card-label">School</span>
+            <span class="card-value">De school met de glazen toilet deurtjes</span>
+          </div>
+          <div class="info-card">
+            <span class="card-icon">📋</span>
+            <span class="card-label">Studie</span>
+            <span class="card-value">Wacht op uitslag</span>
+          </div>
+          <div class="info-card">
+            <span class="card-icon">🌐</span>
+            <span class="card-label">Talen</span>
+            <span class="card-value">Nederlands · Turks · Engels</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Skills</h2>
+        <div class="header-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3 class="skill-group-title">Talen</h3>
+          <div class="skill-bars">
+            <div class="skill-bar">
+              <span class="skill-name">Python</span>
+              <div class="bar-track"><div class="bar-fill" data-width="70"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-name">HTML</span>
+              <div class="bar-track"><div class="bar-fill" data-width="75"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-name">CSS</span>
+              <div class="bar-track"><div class="bar-fill" data-width="65"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-name">Java</span>
+              <div class="bar-track"><div class="bar-fill" data-width="55"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-name">JavaScript</span>
+              <div class="bar-track"><div class="bar-fill" data-width="50"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group-title">Tools</h3>
+          <div class="skill-pills">
+            <span class="pill">Git</span>
+            <span class="pill">VS Code</span>
+            <span class="pill">IntelliJ</span>
+            <span class="pill">Unity</span>
+            <span class="pill">BlockBench</span>
+            <span class="pill">Linux</span>
+          </div>
+        </div>
+        <div class="skill-group skill-group-wide">
+          <h3 class="skill-group-title">Kennis & Interesses</h3>
+          <div class="skill-pills">
+            <span class="pill">Minecraft Modding</span>
+            <span class="pill">Discord Bots</span>
+            <span class="pill">Game Design</span>
+            <span class="pill">CTF</span>
+            <span class="pill">Webdesign</span>
+            <span class="pill">Robotica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Projecten</h2>
+        <div class="header-line"></div>
+      </div>
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <div class="card-header">
+            <span class="card-emoji">🕌</span>
+            <span class="card-badge badge-wip">WIP</span>
+          </div>
+          <h3>DeenCraft</h3>
+          <p class="card-desc">Islamitisch geïnspireerde items & blokken in Minecraft. Leert spelers over de Islam en zijn geschiedenis.</p>
+          <p class="card-tech">Fabric 1.21.10 · Java</p>
+          <div class="card-links">
+            <a href="https://github.com/KaasRijkeTurk/DeenCraft" target="_blank" class="link-btn">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-header">
+            <span class="card-emoji">💎</span>
+          </div>
+          <h3>Curious Crystals</h3>
+          <p class="card-desc">Nieuwe edelstenen, mobs & structuren. Gems geven unieke abilities via de Smithing Table.</p>
+          <p class="card-tech">Fabric 1.20.1 · Java</p>
+          <div class="card-links">
+            <a href="https://github.com/KaasRijkeTurk/Curious-Crystals" target="_blank" class="link-btn">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-header">
+            <span class="card-emoji">🥪</span>
+            <span class="card-badge badge-wip">WIP</span>
+          </div>
+          <h3>TR Sandwich Co. 2.0</h3>
+          <p class="card-desc">Bezoek de website alsjeblieft niet.</p>
+          <p class="card-tech">HTML · CSS · JS · 67% Anorganisch</p>
+          <div class="card-links">
+            <a href="https://kaasrijketurk.github.io/Sandwich/" target="_blank" class="link-btn">Live →</a>
+            <a href="https://github.com/kaasrijketurk/Sandwich" target="_blank" class="link-btn link-ghost">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-header">
+            <span class="card-emoji">🪟</span>
+            <span class="card-badge badge-soon">SOON</span>
+          </div>
+          <h3>Microslop Support AI-Bot</h3>
+          <p class="card-desc">Discord AI-bot voor MC serverbeheer via Ollama (llama3.2). Lokaal, geen API-kosten.</p>
+          <p class="card-tech">Node.js · Ollama · Discord</p>
+          <div class="card-links">
+            <span class="link-btn link-disabled">Coming soon</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="card-header">
+            <span class="card-emoji">֎</span>
+            <span class="card-badge badge-soon">SOON</span>
+          </div>
+          <h3>M365 Nopilot Command-Bot</h3>
+          <p class="card-desc">Discord Command-bot voor het sorteren van YouTube-afspeellijsten via Ollama (llama3.1:8b). Volledig lokaal.</p>
+          <p class="card-tech">Python · Discord.py · Ollama · YouTube API</p>
+          <div class="card-links">
+            <span class="link-btn link-disabled">Coming soon</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="server">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>AeroForge SMP</h2>
+        <div class="header-line"></div>
+      </div>
+      <div class="server-block">
+        <div class="server-info">
+          <div class="server-status">
+            <span class="online-dot"></span>
+            <span>ONLINE</span>
+          </div>
+          <p>Een op maat gemaakte Minecraft server, volledig beheerd door de AI <strong>Microslop Support Bot</strong>. Automatisch beheer, snelle interacties, direct verbonden met Discord.</p>
+          <p class="server-version">NeoForge 1.21.1</p>
+          <a href="AeroForge SMP.mrpack" download class="download-btn">
+            <span class="dl-icon">↓</span>
+            Download Modpack (.mrpack)
+          </a>
+        </div>
+        <div class="server-commands">
+          <h3>Bot Commando's</h3>
+          <div class="cmd-list">
+            <div class="cmd-category">
+              <h4>Algemeen</h4>
+              <code>.help</code> <code>.uptime</code> <code>.purge</code>
+              <code>.roast</code> <code>.poll</code> <code>.coinflip</code>
+              <code>.mock</code> <code>.ship</code> <code>.userinfo</code>
+              <code>.serverinfo</code> <code>.freechat</code>
+            </div>
+            <div class="cmd-category">
+              <h4>Server Beheer</h4>
+              <code>.setup</code> <code>.setwelcome</code>
+              <code>.setautorole</code> <code>.setwelcomemsg</code>
+            </div>
+            <div class="cmd-category">
+              <h4>Minecraft</h4>
+              <code>.mchelp</code> <code>.mcstatus</code> <code>.mcplayers</code>
+              <code>.mcmods</code> <code>.mcjoin</code> <code>.mcinfo</code>
+              <code>.mcwhitelist</code> <code>.mcbanned</code> <code>.mcops</code>
+              <code>.mcrcon</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2>Contact</h2>
+        <div class="header-line"></div>
+      </div>
+      <div class="contact-grid">
+        <a href="mailto:tothinkornottothink@hotmail.com" class="contact-item">
+          <span class="contact-icon">✉</span>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">tothinkornottothink@hotmail.com</span>
+        </a>
+        <a href="https://github.com/KaasRijkeTurk" target="_blank" class="contact-item">
+          <span class="contact-icon">⌘</span>
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">KaasRijkeTurk</span>
+        </a>
+        <a href="http://www.linkedin.com/in/Mert-Can67" target="_blank" class="contact-item">
+          <span class="contact-icon">in</span>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">Mert Can</span>
+        </a>
+        <a href="https://www.youtube.com/@DawahSimplified" target="_blank" class="contact-item">
+          <span class="contact-icon">▶</span>
+          <span class="contact-label">YouTube</span>
+          <span class="contact-value">DawahSimplified</span>
+        </a>
+        <a href="https://www.tiktok.com/@datawithmert" target="_blank" class="contact-item">
+          <span class="contact-icon">♪</span>
+          <span class="contact-label">TikTok</span>
+          <span class="contact-value">@datawithmert</span>
+        </a>
+        <a href="https://nl.fiverr.com/datawithmert" target="_blank" class="contact-item">
+          <span class="contact-icon">ƒ</span>
+          <span class="contact-label">Fiverr</span>
+          <span class="contact-value">datawithmert</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Mert Can — Portfolio v1 (volledig AI-generated)</p>
+  </footer>
+
+  <script src="scriptv1.js"></script>
+</body>
+</html>

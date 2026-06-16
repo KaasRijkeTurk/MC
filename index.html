@@ -8,15 +8,6 @@
 </head>
 <body>
 
-  <div class="version-bar">
-    <span class="version-label">PORTFOLIO_VER:</span>
-    <div class="version-buttons">
-      <a href="versie-1.html" class="v-btn" title="Volledig RAW AI, geen aanpassingen">[1] RAW_AI</a>
-      <a href="index.html" class="v-btn active" title="AI Tweaked (huidige versie)">[2] AI_TWEAKED</a>
-      <a href="versie-3.html" class="v-btn" title="Geen AI, puur handwerk">[3] HUMAN_ONLY</a>
-    </div>
-  </div>
-
   <div class="dna-bg" aria-hidden="true">
     <canvas id="dna-canvas"></canvas>
   </div>
@@ -36,34 +27,27 @@
         </span>
         <span class="nav-tagline">ANALYSE<span class="accent">.</span> CREATE<span class="accent">.</span> PLAY<span class="accent">.</span></span>
       </span>
-      
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="nl">NL</button>
-        <span class="lang-sep">|</span>
-        <button class="lang-btn" data-lang="tr">TR</button>
-        <span class="lang-sep">|</span>
-        <button class="lang-btn" data-lang="en">EN</button>
-        
-        <span class="lang-sep" style="margin-left: 0.5rem; margin-right: 0.5rem;">|</span>
-        
-        <div class="zoom-controls" style="display: inline-flex;">
+
+      <div class="nav-controls">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="nl">NL</button>
+          <span class="lang-sep">|</span>
+          <button class="lang-btn" data-lang="tr">TR</button>
+          <span class="lang-sep">|</span>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+
+        <div class="zoom-controls">
           <button id="zoom-out" class="zoom-btn" aria-label="Tekst verkleinen">−</button>
           <button id="zoom-in" class="zoom-btn" aria-label="Tekst vergroten">+</button>
         </div>
-      </div>
-      
-      <div class="nav-right">
-        <ul>
-          <li><a href="#over">over</a></li>
-          <li><a href="#skills">skills</a></li>
-          <li><a href="#projecten">projecten</a></li>
-          <li><a href="#extras">extras</a></li>
-          <li><a href="#contact">contact</a></li>
-        </ul>
-        <div class="nav-status">
-          <span class="status-dot"></span>
-          <span class="status-text">EXAMENS VOORBIJ!</span>
+
+        <div class="version-switcher">
+          <a href="index_AI.html" class="v-btn" title="Volledig RAW AI, geen aanpassingen">AI</a>
+          <a href="index.html" class="v-btn active" title="AI Tweaked (huidige versie)">AI + HUMAN</a>
+          <a href="index_HUMAN.html" class="v-btn" title="Geen AI, puur handwerk">HUMAN</a>
         </div>
+
         <button class="hamburger" aria-label="Menu openen" aria-expanded="false">
           <div class="ham-inner">
             <span class="ham-line ham-line--top"></span>
@@ -317,7 +301,7 @@
         <div class="server-info-box">
           <div class="server-title-row">
             <span class="server-status-pill">ONLINE</span>
-            <h2>AeroForge SMP</h2>
+            <h2>Beek SMP</h2>
             <span class="server-badge">NeoForge 1.21.1</span>
           </div>
           <p class="server-description">
@@ -326,7 +310,7 @@
           
           <div class="download-container">
             <div class="download-label">MODPACK BESTAND (.mrpack)</div>
-            <a href="AeroForge_SMP.mrpack" download class="btn-download">
+            <a href="Beek SMP 1.5.mrpack" download class="btn-download">
               <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
               </svg>
