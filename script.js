@@ -624,12 +624,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const htmlElement = document.documentElement;
   const btnZoomIn = document.getElementById('zoom-in');
   const btnZoomOut = document.getElementById('zoom-out');
+  const zoomControls = document.querySelector('.zoom-controls');
+
+  function updateZoomDisplay() {
+    if (zoomControls) {
+      zoomControls.setAttribute('data-zoom-level', currentZoom);
+      // Show the zoom level temporarily
+      zoomControls.classList.add('show-zoom-level');
+      setTimeout(() => {
+        zoomControls.classList.remove('show-zoom-level');
+      }, 2000);
+    }
+  }
 
   if (btnZoomIn && btnZoomOut) {
     btnZoomIn.addEventListener('click', () => {
       if (currentZoom < MAX_ZOOM) {
         currentZoom += ZOOM_STEP;
         htmlElement.style.fontSize = `${currentZoom}%`;
+        updateZoomDisplay();
       }
     });
 
@@ -637,9 +650,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentZoom > MIN_ZOOM) {
         currentZoom -= ZOOM_STEP;
         htmlElement.style.fontSize = `${currentZoom}%`;
+        updateZoomDisplay();
       }
     });
     
+    // Initialize display
+    updateZoomDisplay();
   } else {
     console.warn("[System] Zoom-knoppen niet gevonden. Controleer of de IDs 'zoom-in' en 'zoom-out' correct zijn ingesteld.");
   }
