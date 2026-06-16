@@ -117,11 +117,11 @@ ul { list-style: none; }
    ============================================ */
 nav {
   position: fixed;
-  width: 100% !important;
-  max-width: 650px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: 32px; /* Dit is de hoogte van je version-bar inclusief padding */
+  width: 100%;
+  max-width: min(650px, calc(100vw - 2rem));
+  left: 50%;
+  transform: translateX(-50%);
+  top: 32px;
   height: var(--nav-h);
   z-index: 160;
   background: rgba(10, 12, 15, 0.96);
@@ -129,7 +129,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 1rem !important;
+  padding: 0 1rem;
   border-bottom: 1px solid var(--border);
   border-left: 1px solid var(--border);
   border-right: 1px solid var(--border);
@@ -137,23 +137,22 @@ nav {
 }
 
 .dashboard {
-  position: relative !important;
-  /* Schuift de content perfect naar beneden op basis van de nieuwe hoogte + version-bar */
-  margin: calc(var(--nav-h) + 32px) auto 2rem auto; 
-  width: 100%;                   
-  max-width: 650px; 
+  position: relative;
+  margin: calc(var(--nav-h) + 32px) auto 2rem auto;
+  width: 100%;
+  max-width: min(650px, calc(100vw - 2rem));
   z-index: 10;
-  display: flex !important;                 
-  flex-direction: column !important;        
-  gap: 0 !important;
-  background: transparent !important; /* Blijft transparant zodat panelen hun eigen achtergrond bepalen */
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: transparent;
   border-left: 1px solid var(--border);
   border-right: 1px solid var(--border);
 }
 
 .panel-col-mid {
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: column;
   gap: 1px;
   background: var(--border);
 }
@@ -164,7 +163,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 !important;
+  padding: 0;
 }
 
 .nav-logo {
@@ -214,7 +213,7 @@ nav {
 .nav-tagline,
 .nav-status,
 nav ul {
-  display: none !important;
+  display: none;
 }
 
 .nav-right {
@@ -293,11 +292,11 @@ nav ul {
    PANELS BASE CONFIG
    ============================================ */
 .panel {
-  background: var(--bg) !important;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: auto !important;
+  min-height: auto;
   border-bottom: 1px solid var(--border);
   border-left: 2px solid transparent;
   transition: border-color 0.3s ease;
@@ -336,7 +335,7 @@ nav ul {
    HERO PANEL
    ============================================ */
 .panel-hero {
-  background: var(--bg) !important;
+  background: var(--bg);
   box-shadow: none;
 }
 
@@ -347,18 +346,18 @@ nav ul {
   gap: 0.8rem;
   flex: 1;
   overflow: hidden;
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 
 /* ============================================
    THE OPEN WINDOW: DNA ALLEEN BIJ REVEAL VISIBLE
    ============================================ */
 .panel-hero:has(.hero-inner.reveal.visible) {
-  background: transparent !important;
+  background: transparent;
 }
 
 .panel-hero .hero-inner.reveal.visible {
-  background: transparent !important;
+  background: transparent;
 }
 
 .hero-sup {
@@ -762,7 +761,7 @@ nav ul {
 
 @media (max-width: 768px) {
   .nav-right ul {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -770,12 +769,12 @@ nav ul {
    HAMBURGER BUTTON (ALTIJD AAN)
    ============================================ */
 .hamburger {
-  display: flex !important; 
+  display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row; 
-  gap: 0.5rem; 
-  width: auto; 
+  flex-direction: row;
+  gap: 0.5rem;
+  width: auto;
   height: 2.5rem;
   background: transparent;
   border: none;
@@ -1148,13 +1147,13 @@ nav ul {
   overflow: hidden;
 }
 
-/* Bereken de posities op basis van je gecentreerde 650px dashboard */
+/* Dynamische posities op basis van de daadwerkelijke dashboard breedte */
 .left-game {
-  right: calc(50% + 325px + 20px); /* 50% + helft dashboard + 20px marge */
+  right: calc(50% + min(325px, calc(50vw - 1rem)) + 20px);
 }
 
 .right-game {
-  left: calc(50% + 325px + 20px);
+  left: calc(50% + min(325px, calc(50vw - 1rem)) + 20px);
 }
 
 .side-game canvas {
@@ -1163,10 +1162,17 @@ nav ul {
   background: #0d1016;
 }
 
-/* Verberg de game op kleinere schermen/tablets waar geen ruimte is */
+/* Verberg de game wanneer er te weinig ruimte is (overlap detectie) */
 @media (max-width: 1150px) {
   .side-game {
-    display: none !important;
+    display: none;
+  }
+}
+
+/* Extra veiligheid: verberg side-games als het viewport te smal wordt door zoom */
+@media (max-width: 1000px) {
+  .side-game {
+    display: none;
   }
 }
 
@@ -1175,7 +1181,8 @@ nav ul {
    ============================================ */
 @media (max-width: 650px) {
   nav, .dashboard {
-    max-width: 100% !important;
+    max-width: calc(100vw - 2rem);
+    width: 100%;
   }
   .zoom-controls {
     margin-left: 0.2rem;

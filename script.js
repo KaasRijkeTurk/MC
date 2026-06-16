@@ -637,12 +637,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Functie om side-games te verbergen/tonen op basis van beschikbare ruimte
+  function checkSideGames() {
+    const viewportWidth = window.innerWidth;
+    const dashboard = document.querySelector('.dashboard');
+    const dashboardWidth = dashboard ? dashboard.offsetWidth : 650;
+    const sideGames = document.querySelectorAll('.side-game');
+    
+    // Ruimte nodig: dashboard + 2x game breedte + marges
+    const neededWidth = dashboardWidth + (220 * 2) + 80;
+    
+    sideGames.forEach(game => {
+      if (viewportWidth < neededWidth) {
+        game.style.display = 'none';
+      } else {
+        game.style.display = '';
+      }
+    });
+  }
+
   if (btnZoomIn && btnZoomOut) {
     btnZoomIn.addEventListener('click', () => {
       if (currentZoom < MAX_ZOOM) {
         currentZoom += ZOOM_STEP;
         htmlElement.style.fontSize = `${currentZoom}%`;
         updateZoomDisplay();
+        // Controleer na een korte delay of side-games nog passen
+        setTimeout(checkSideGames, 100);
       }
     });
 
@@ -651,11 +672,17 @@ document.addEventListener('DOMContentLoaded', () => {
         currentZoom -= ZOOM_STEP;
         htmlElement.style.fontSize = `${currentZoom}%`;
         updateZoomDisplay();
+        // Controleer na een korte delay of side-games weer passen
+        setTimeout(checkSideGames, 100);
       }
     });
     
-    // Initialize display
+    // Initialize display en check side-games
     updateZoomDisplay();
+    checkSideGames();
+    
+    // Luister naar resize events (voor browser zoom met Ctrl+/-)
+    window.addEventListener('resize', checkSideGames);
   } else {
     console.warn("[System] Zoom-knoppen niet gevonden. Controleer of de IDs 'zoom-in' en 'zoom-out' correct zijn ingesteld.");
   }
@@ -679,8 +706,10 @@ document.addEventListener('DOMContentLoaded', () => {
   canvasL.width = w; canvasL.height = h;
   canvasR.width = w; canvasR.height = h;
 
-  // Virtuele totale breedte (inclusief de 650px lege ruimte van je portfolio)
-  const gap = 650 + 40; // Dashboard breedte + marges
+  // Dynamische totale breedte gebaseerd op de daadwerkelijke dashboard grootte
+  const dashboard = document.querySelector('.dashboard');
+  const dashboardWidth = dashboard ? dashboard.offsetWidth : 650;
+  const gap = dashboardWidth + 40; // Dashboard breedte + marges
   const totalWidth = w + gap + w;
 
   // Game objecten
