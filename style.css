@@ -15,7 +15,7 @@
   --warn: #ffb400;
   --font-mono: 'Space Mono', monospace;
   --font-display: 'Syne', sans-serif;
-  --nav-h: 90px;
+  --nav-h: 100px;
 }
 
 *, *::before, *::after { 
@@ -119,6 +119,21 @@ nav {
   gap: 0.5rem;
 }
 
+.nav-center-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+/* Hamburger rechts, onafhankelijk */
+.nav-top > .hamburger {
+  flex-shrink: 0;
+}
+
 /* ============================================
    NAV CONTROLS (RIGHT SIDE)
    ============================================ */
@@ -129,16 +144,23 @@ nav {
   flex-shrink: 0;
 }
 
+.nav-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 /* ============================================
    VERSION SWITCHER (COMPACT)
    ============================================ */
 .version-switcher {
   display: flex;
   align-items: center;
-  gap: 0.15rem;
+  gap: 0.5rem;
   background: var(--surface2);
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 190px;
+  height: 2rem;
   padding: 0.1rem;
 }
 
@@ -152,7 +174,7 @@ nav {
   font-size: 0.55rem;
   font-family: var(--font-mono);
   letter-spacing: 0.05em;
-  border-radius: 2px;
+  border-radius: 190px;
   white-space: nowrap;
 }
 
@@ -270,7 +292,7 @@ nav ul {
 .lang-switcher {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.5rem;
   position: relative;
   z-index: 300;
   flex-shrink: 0;
@@ -820,13 +842,24 @@ nav ul {
    MOBILE NAV OVERLAY
    ============================================ */
 .mobile-nav {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
   z-index: 150;
   pointer-events: none;
   visibility: hidden;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border: none !important;
+  overflow: visible !important;
 }
 
 .mobile-nav.open {
@@ -1045,7 +1078,7 @@ nav ul {
    ============================================ */
 .zoom-controls {
   display: flex;
-  gap: 0.2rem;
+  gap: 0.67rem;
   align-items: center;
   position: relative;
   z-index: 300;
@@ -1104,7 +1137,7 @@ nav ul {
 }
 
 .zoom-controls.show-zoom-level::after {
-  opacity: 1;
+  opacity: 1e;
   transform: translateY(0);
 }
 /* ============================================
@@ -1162,12 +1195,40 @@ nav ul {
     max-width: calc(100vw - 2rem);
     width: 100%;
   }
-  .nav-controls {
-    gap: 0.4rem;
+
+  /* --- NAV TOP: logo links | controls midden | hamburger rechts --- */
+  .nav-top {
+    justify-content: space-between;
   }
+
+  .nav-logo {
+    flex-shrink: 0;
+  }
+
+  /* Midden-controls nemen alle ruimte in */
+  .nav-center-controls {
+    flex: 1;
+  }
+
+  .nav-controls-row {
+    gap: 0.67rem;
+  }
+
+  /* Hamburger rechts, onafhankelijk */
+  .nav-top > .hamburger {
+    flex-shrink: 0;
+  }
+
+  /* Toon de version-switcher op mobiel, maar compacter */
   .version-switcher {
-    display: none;
+    display: flex;
   }
+
+  .version-switcher .v-btn {
+    padding: 0.12rem 0.25rem;
+    font-size: 0.5rem;
+  }
+
   .zoom-btn {
     width: 20px;
     height: 20px;
