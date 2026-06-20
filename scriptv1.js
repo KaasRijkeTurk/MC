@@ -77,8 +77,9 @@
   animate();
 })();
 
-// --- Cursor Glow ---
+// --- Cursor Glow (desktop only) ---
 (function initCursorGlow() {
+  if ('ontouchstart' in window) return;
   const glow = document.getElementById('cursor-glow');
   document.addEventListener('mousemove', (e) => {
     glow.style.left = e.clientX - 150 + 'px';
@@ -90,10 +91,11 @@
 (function initTypewriter() {
   const el = document.getElementById('typewriter');
   const phrases = [
-    'Hallo, ik ben Mert Can.',
-    'Ik bouw dingen met code.',
-    'Mods · Bots · Websites',
-    'Examens voorbij. Wat nu?'
+    'Ethical AI for a Free Future',
+    '16x more efficient than ChatGPT',
+    'Your data stays yours. Always.',
+    'Built by rebels, for revolutionaries.',
+    'No military. No surveillance. No compromise.',
   ];
   let phraseIdx = 0;
   let charIdx = 0;
