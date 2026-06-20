@@ -245,7 +245,7 @@ const translations = {
     'panel-04':    "04 / extra's",
     'over-bio':    '18 jaar. UITSLAG KOMT. Ik bouw mods, sites en scripts voor <span class="accent">ervaring</span> en <span class="accent">connecties</span>.',
     'chip-0':      'De school met de glazen toilet deurtjes.',
-    'chip-1':      'Ik wacht op mn uitslag',
+    'chip-1':      'Geslaagd, YIPPEE!',
     'chip-2':      'NL · TR · EN',
     'proj-desc-0': 'Islamitisch geïnspireerde items & blokken in Minecraft. Leert spelers over de Islam en zijn geschiedenis.',
     'proj-desc-1': 'Nieuwe edelstenen, mobs & structuren. Gems geven unieke abilities via de Smithing Table.',
@@ -269,7 +269,7 @@ const translations = {
     
     // AeroForge & Terminal
     'af-status':          'ONLINE',
-    'af-title':           'AeroForge SMP',
+    'af-title':           'Beek SMP',
     'af-version':         'NeoForge 1.21.1',
     'af-desc':            'Dit is een op maat gemaakte Minecraft server die volledig wordt beheerd door de geavanceerde AI Microslop Support Bot. Automatisch beheer, snelle interacties en direct verbonden met Discord.',
     'af-pack-title':      'MODPACK BESTAND (.mrpack)',
@@ -331,7 +331,7 @@ const translations = {
     'panel-04':    '04 / extras',
     'over-bio':    '18 years old. Results pending. I build mods, sites and scripts for <span class="accent">experience</span> and <span class="accent">connections</span>.',
     'chip-0':      'The school with the glass toilet doors.',
-    'chip-1':      'Waiting for my results',
+    'chip-1':      'Geslaagd, YIPPEE!',
     'chip-2':      'NL · TR · EN',
     'proj-desc-0': 'Islamic inspired items & blocks in Minecraft. Teaches players about Islam and its history.',
     'proj-desc-1': 'New gemstones, mobs & structures. Gems grant unique abilities via the Smithing Table.',
@@ -355,7 +355,7 @@ const translations = {
     
     // AeroForge & Terminal
     'af-status':          'ONLINE',
-    'af-title':           'AeroForge SMP',
+    'af-title':           'Beek SMP',
     'af-version':         'NeoForge 1.21.1',
     'af-desc':            'This is a custom-built Minecraft server fully managed by the advanced AI Microslop Support Bot. Automated management, fast interactions, and directly linked to Discord.',
     'af-pack-title':      'MODPACK FILE (.mrpack)',
@@ -417,7 +417,7 @@ const translations = {
     'panel-04':    '04 / ekstralar',
     'over-bio':    '18 yaşında. Sonuçlar bekleniyor. <span class="accent">Deneyim</span> ve <span class="accent">bağlantı</span> için mod, site ve script yapıyorum.',
     'chip-0':      'Cam tuvalet kapılı okul.',
-    'chip-1':      'Sonuçlarımı bekliyorum',
+    'chip-1':      'Geslaagd, YIPPEE!',
     'chip-2':      'NL · TR · EN',
     'proj-desc-0': 'Minecraft\'a İslami ilhamlı eşyalar & bloklar. Oyunculara İslam\'ı ve tarihini öğretir.',
     'proj-desc-1': 'Yeni mücevherler, moblar & yapılar. Gems, Smithing Table ile benzersiz yetenekler verir.',
@@ -441,7 +441,7 @@ const translations = {
     
     // AeroForge & Terminal
     'af-status':          'ÇEVRİMİÇİ',
-    'af-title':           'AeroForge SMP',
+    'af-title':           'Beek SMP',
     'af-version':         'NeoForge 1.21.1',
     'af-desc':            'Bu, gelişmiş yapay zeka Microslop Destek Botu tarafından tamamen yönetilen, özel tasarım bir Minecraft sunucusudur. Otomatik yönetim, hızlı etkileşimler ve doğrudan Discord bağlantısı.',
     'af-pack-title':      'MODPAKETİ DOSYASI (.mrpack)',
