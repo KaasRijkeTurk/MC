@@ -156,12 +156,12 @@ nav {
 .version-switcher {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 190px;
   height: 2rem;
-  padding: 0 0.3rem;
+  padding: -1px 0.3rem;
 }
 
 .version-switcher .v-btn {
