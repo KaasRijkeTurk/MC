@@ -230,30 +230,43 @@ if (track) {
   track.style.animationDuration = duration + 's';
   track.style.setProperty('--marquee-end', `-${halfWidth}px`);
 }
+/* ============================================
+   TAAL TOGGLE
+   ============================================ */
 const translations = {
   nl: {
-    'hero-sup': 'SOFTWARE DEVELOPER',
-    'hero-sub': 'Gepassioneerd door het bouwen van efficiënte software, geautomatiseerde systemen en data-gedreven oplossingen.',
+    'hero-sup':    'EXAMENS VOORBIJ!',
+    'hero-sub':    'EXAMENS ZIJN VOORBIJ!',
     'btn-primary': 'Bekijk projecten',
-    'panel-00': '00 / identiteit',
-    'panel-01': '01 / over mij',
-    'panel-02': '02 / skills',
-    'panel-03': '03 / projecten',
-    'panel-04': "04 / extra's",
-    'chip-status-key': 'STATUS',
-    'chip-status-val': 'Opleiding Succesvol Afgerond',
-    'chip-focus-key': 'FOCUS',
-    'chip-focus-val': 'Software Development & AI Integratie',
-    'chip-lang-key': 'TAAL',
-    'chip-lang-val': 'NL · TR · EN',
-    'over-bio': '18 jaar. Recent afgestudeerd. Ik focus op het bouwen van robuuste mods, webapplicaties en scripts om complexe processen te automatiseren en <span class="accent">waardevolle technische ervaring</span> op te doen.',
+    'panel-00':    '00 / identiteit',
+    'panel-01':    '01 / over mij',
+    'panel-02':    '02 / skills',
+    'panel-03':    '03 / projecten',
+    'panel-04':    "04 / extra's",
+    'over-bio':    '18 jaar. UITSLAG KOMT. Ik bouw mods, sites en scripts voor <span class="accent">ervaring</span> en <span class="accent">connecties</span>.',
+    'chip-0':      'De school met de glazen toilet deurtjes.',
+    'chip-1':      'Geslaagd, YIPPEE!',
+    'chip-2':      'NL · TR · EN',
     'proj-desc-0': 'Islamitisch geïnspireerde items & blokken in Minecraft. Leert spelers over de Islam en zijn geschiedenis.',
-    'proj-desc-1': 'Gameplay uitbreiding door middel van custom data-driven systemen en het implementeren van nieuwe in-game mechanics.',
-    'proj-desc-2': 'Een experimenteel webontwikkelingsproject gericht op frontend architectuur, DOM-manipulatie en UI/UX iteratie.',
-    'proj-desc-3': 'Discord AI-bot voor serverbeheer geïntegreerd met Ollama (llama3.2). Gehost in een lokale omgeving ter besparing van API-kosten.',
-    'proj-desc-4': 'Discord Command-bot voor het dynamisch sorteren en categoriseren van YouTube-afspeellijsten via lokale LLM-verwerking (Ollama llama3.1:8b).',
-
-
+    'proj-desc-1': 'Nieuwe edelstenen, mobs & structuren. Gems geven unieke abilities via de Smithing Table.',
+    'proj-desc-2': 'Bezoek de website astublieft niet.',
+    'proj-desc-3': 'Discord AI-bot voor MC serverbeheer via Ollama (llama3.2). Lokaal, geen API-kosten.',
+    'status':      'EXAMENS VOORBIJ!',
+    'proj-title-4':  'M365 Nopilot Command-Bot',
+    'proj-status-4': 'Binnenkort beschikbaar',
+    'proj-badge-4':  'SOON',
+    'proj-desc-4':   "Discord Command-bot voor het sorteren van YouTube-afspeellijsten en het categoriseren van video's via Ollama (llama3.1:8b). Volledig lokaal, dus geen API-kosten.",
+    
+    // Desktop Nav Volgorde
+    'nav-0': 'over', 'nav-1': 'skills', 'nav-2': 'projecten', 'nav-3': 'contact', 'nav-4': "extra's",
+    
+    // Mobiele Nav Volgorde (Gematched met jouw HTML-lijst!)
+    'mob-0': 'over',       // plek 1
+    'mob-1': 'skills',     // plek 2
+    'mob-2': 'projecten',  // plek 3
+    'mob-3': "extra's",    // plek 4
+    'mob-4': 'contact',    // plek 5
+    
     // AeroForge & Terminal
     'af-status':          'ONLINE',
     'af-title':           'Beek SMP',
@@ -292,13 +305,11 @@ const translations = {
     'af-cmd-mcops':       '.mcops — operators/admins',
     'af-cmd-mcrcon':      '.mcrcon [commando] [ww] — stuur RCON commando',
 
-
-    // Marquee
     marquee: [
       'Wist je dat water nat is?',
       'Wist je dat als je valt, de grond je altijd vangt?',
       'Wist je dat je met je benen kunt lopen als je ze beweegt?',
-      'Wist je dat als je hard rent, je sneller bent dan wanneer je langzaam loopt?',
+      'Wist je dat als je hard ren, je sneller bent dan wanneer je langzaam loopt?',
       'Wist je dat een steen zwaar is, tenzij hij klein is?',
       'Wist je dat als je stopt met ademen, je dood gaat?',
       'Wist je dat als je een trap op loopt, je hoger komt dan toen je begon?',
@@ -307,43 +318,41 @@ const translations = {
       'Wist je dat een gat in de grond eigenlijk een afwezigheid van grond is?',
       'Wist je dat 6 bang is voor 7?',
       'Wist je dat, dat je wist?',
-    ],
-    
-    // Navigation (Desktop & Mobile)
-    nav_items: ['over', 'skills', 'projecten', 'extras', 'contact']
+    ]
   },
-
   en: {
-    // Hero & Over
-    'hero-sup': 'SOFTWARE DEVELOPER',
-    'hero-sub': 'Passionate about building efficient software, automated systems, and data-driven solutions.',
+    'hero-sup':    'EXAMS ARE OVER!',
+    'hero-sub':    'EXAMS ARE FINALLY OVER!',
     'btn-primary': 'View projects',
+    'panel-00':    '00 / identity',
+    'panel-01':    '01 / about me',
+    'panel-02':    '02 / skills',
+    'panel-03':    '03 / projects',
+    'panel-04':    '04 / extras',
+    'over-bio':    '18 years old. Results pending. I build mods, sites and scripts for <span class="accent">experience</span> and <span class="accent">connections</span>.',
+    'chip-0':      'The school with the glass toilet doors.',
+    'chip-1':      'Geslaagd, YIPPEE!',
+    'chip-2':      'NL · TR · EN',
+    'proj-desc-0': 'Islamic inspired items & blocks in Minecraft. Teaches players about Islam and its history.',
+    'proj-desc-1': 'New gemstones, mobs & structures. Gems grant unique abilities via the Smithing Table.',
+    'proj-desc-2': 'Please do not visit the website.',
+    'proj-desc-3': 'Discord AI-bot for MC server management via Ollama (llama3.2). Local, no API costs.',
+    'status':      'EXAMS OVER!',
+    'proj-title-4':  'M365 Nopilot Command-Bot',
+    'proj-status-4': 'Coming soon',
+    'proj-badge-4':  'SOON',
+    'proj-desc-4':   "Discord Command-bot for sorting YouTube playlists and categorizing videos via Ollama (llama3.1:8b). Completely local, so no API costs.",
+   
+    // Desktop Nav
+    'nav-0': 'about', 'nav-1': 'skills', 'nav-2': 'projects', 'nav-3': 'contact', 'nav-4': 'extras',
     
-    // Panels
-    'panel-00': '00 / identity',
-    'panel-01': '01 / about me',
-    'panel-02': '02 / skills',
-    'panel-03': '03 / projects',
-    'panel-04': '04 / extras',
-
-    // Bio Stats
-    'chip-status-key': 'STATUS',
-    'chip-status-val': 'Education Successfully Completed',
-    'chip-focus-key': 'FOCUS',
-    'chip-focus-val': 'Software Development & AI Integration',
-    'chip-lang-key': 'LANG',
-    'chip-lang-val': 'NL · TR · EN',
+    // Mobile Nav
+    'mob-0': 'about',
+    'mob-1': 'skills',
+    'mob-2': 'projects',
+    'mob-3': 'extras',
+    'mob-4': 'contact',
     
-    'over-bio': '18 years old. Recently graduated. I focus on building robust mods, web apps, and scripts to automate complex processes and gain <span class="accent">valuable technical experience</span>.',
-
-    // Projects
-    'proj-desc-0': 'Islamic-inspired items & blocks in Minecraft. Teaches players about Islam and its history.',
-    'proj-desc-1': 'Gameplay expansion through custom data-driven systems and implementation of new in-game mechanics.',
-    'proj-desc-2': 'An experimental web development project focused on frontend architecture, DOM manipulation, and UI/UX iteration.',
-    'proj-desc-3': 'Discord AI-bot for server management integrated with Ollama (llama3.2). Hosted locally to save on API costs.',
-    'proj-desc-4': 'Discord Command-bot for dynamically sorting and categorizing YouTube playlists via local LLM processing (Ollama llama3.1:8b).',
-
-      
     // AeroForge & Terminal
     'af-status':          'ONLINE',
     'af-title':           'Beek SMP',
@@ -382,7 +391,6 @@ const translations = {
     'af-cmd-mcops':       '.mcops — operators/admins',
     'af-cmd-mcrcon':      '.mcrcon [command] [pw] — send RCON command',
 
-    // Marquee
     marquee: [
       'Did you know water is wet?',
       'Did you know if you fall, the ground always catches you?',
@@ -396,42 +404,41 @@ const translations = {
       'Did you know a hole in the ground is just an absence of ground?',
       'Did you know 6 is afraid of 7?',
       'Did you know that you knew that?',
-    ],
-
-    // Navigation (Desktop & Mobile)
-    nav_items: ['about', 'skills', 'projects', 'extras', 'contact']
+    ]
   },
-
   tr: {
-    // Hero & Over
-    'hero-sup': 'YAZILIM GELİŞTİRİCİSİ',
-    'hero-sub': 'Verimli yazılım, otomatikleştirilmiş sistemler ve veriye dayalı çözümler oluşturmaya tutkuyla bağlıyım.',
-    'btn-primary': 'Projeleri Görüntüle',
+    'hero-sup':    'SINAVLAR BİTTİ!',
+    'hero-sub':    'SINAVLAR SONUNDA BİTTİ!',
+    'btn-primary': 'Projelere bak',
+    'panel-00':    '00 / kimlik',
+    'panel-01':    '01 / hakkımda',
+    'panel-02':    '02 / beceriler',
+    'panel-03':    '03 / projeler',
+    'panel-04':    '04 / ekstralar',
+    'over-bio':    '18 yaşında. Sonuçlar bekleniyor. <span class="accent">Deneyim</span> ve <span class="accent">bağlantı</span> için mod, site ve script yapıyorum.',
+    'chip-0':      'Cam tuvalet kapılı okul.',
+    'chip-1':      'Geslaagd, YIPPEE!',
+    'chip-2':      'NL · TR · EN',
+    'proj-desc-0': 'Minecraft\'a İslami ilhamlı eşyalar & bloklar. Oyunculara İslam\'ı ve tarihini öğretir.',
+    'proj-desc-1': 'Yeni mücevherler, moblar & yapılar. Gems, Smithing Table ile benzersiz yetenekler verir.',
+    'proj-desc-2': 'Lütfen siteyi ziyaret etmeyin.',
+    'proj-desc-3': 'Ollama (llama3.2) ile MC sunucu yönetimi için Discord AI-botu. Yerel, API maliyeti yok.',
+    'status':      'SINAVLAR BİTTİ!',
+    'proj-title-4':  'M365 Nopilot Command-Bot',
+    'proj-status-4': 'Yakında gelecek',
+    'proj-badge-4':  'YAKINDA',
+    'proj-desc-4':   "YouTube oynatma listelerini sıralamak ve videoları Ollama (llama3.1:8b) üzerinden kategorize etmek için Discord Command-botu. Tamamen yerel, yani API maliyeti yok.",
+
+    // Desktop Nav
+    'nav-0': 'hakkında', 'nav-1': 'beceriler', 'nav-2': 'projeler', 'nav-3': 'iletişim', 'nav-4': 'ekstralar',
     
-    // Panels
-    'panel-00': '00 / kimlik',
-    'panel-01': '01 / hakkımda',
-    'panel-02': '02 / beceriler',
-    'panel-03': '03 / projeler',
-    'panel-04': '04 / ekstralar',
-
-    // Bio Stats
-    'chip-status-key': 'DURUM',
-    'chip-status-val': 'Eğitim Başarıyla Tamamlandı',
-    'chip-focus-key': 'ODAK',
-    'chip-focus-val': 'Yazılım Geliştirme & AI Entegrasyonu',
-    'chip-lang-key': 'DİL',
-    'chip-lang-val': 'NL · TR · EN',
+    // Mobile Nav
+    'mob-0': 'hakkında',
+    'mob-1': 'beceriler',
+    'mob-2': 'projeler',
+    'mob-3': 'ekstralar',
+    'mob-4': 'iletişim',
     
-    'over-bio': '18 yaşında. Yeni mezun. Karmaşık süreçleri otomatikleştirmek ve <span class="accent">değerli teknik deneyim</span> kazanmak için sağlam modlar, web uygulamaları ve komut dosyaları oluşturmaya odaklanıyorum.',
-
-    // Projects
-    'proj-desc-0': 'Minecraft\'ta İslami ilhamlı eşyalar & bloklar. Oyunculara İslam\'ı ve tarihini öğretir.',
-    'proj-desc-1': 'Özel veri odaklı sistemler ve yeni oyun içi mekaniklerin uygulanması ile oynanış genişletmesi.',
-    'proj-desc-2': 'Ön yüz mimarisi, DOM manipülasyonu ve UI/UX yinelemesine odaklanan deneysel bir web geliştirme projesi.',
-    'proj-desc-3': 'Ollama (llama3.2) ile entegre edilmiş sunucu yönetimi için Discord AI-botu. API maliyetlerinden tasarruf etmek için yerel olarak barındırılıyor.',
-    'proj-desc-4': 'Yerel LLM işleme (Ollama llama3.1:8b) aracılığıyla YouTube oynatma listelerini dinamik olarak sıralayan ve kategorize eden Discord Komut-botu.',
-
     // AeroForge & Terminal
     'af-status':          'ÇEVRİMİÇİ',
     'af-title':           'Beek SMP',
@@ -469,7 +476,7 @@ const translations = {
     'af-cmd-mcbanned':    '.mcbanned — yasaklı oyuncular',
     'af-cmd-mcops':       '.mcops — authorities/admins',
     'af-cmd-mcrcon':      '.mcrcon [komut] [şifre] — RCON komutu gönderir',
-    // Marquee
+
     marquee: [
       'Suyun ıslak olduğunu biliyor muydun?',
       'Düştüğünde yerin seni her zaman tuttuğunu biliyor muydun?',
@@ -483,13 +490,9 @@ const translations = {
       'Yerdeki çukurun aslında toprağın yokluğu olduğunu biliyor muydun?',
       '6\'nın 7\'den korktuğunu biliyor muydun?',
       'Bunu bildiğini bildiğini biliyor muydun?',
-    ],
-
-    // Navigation (Desktop & Mobile)
-    nav_items: ['hakkında', 'beceriler', 'projeler', 'ekstralar', 'iletişim']
+    ]
   }
 };
-
 
 function applyLang(lang) {
   const t = translations[lang];
