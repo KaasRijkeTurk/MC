@@ -112,15 +112,15 @@
         <span class="panel-corner">◢</span>
       </div>
       <div class="hero-inner">
-        <p class="hero-sup">SOFTWARE DEVELOPER</p>
+        <p class="hero-sup">Vakantieeeeeeeeeeeeeeeeee</p>
 <h1>
   <span class="glitch" style="color: #ffffff;" data-text="Mert_">Mert_</span><span class="glitch" style="color: var(--accent);" data-text="Can">Can</span>
   
   <br/>
   
-  <span class="glitch" style="color: var(--accent);" data-text="Code">Code</span><span class="glitch" style="color: #ffffff;" data-text="_Logic">_Logic</span>
+  <span class="glitch" style="color: var(--accent);" data-text="B%@#r">B%@#r</span><span class="glitch" style="color: #ffffff;" data-text="_i9!i">_i9!i</span>
 </h1>
-        <p class="hero-sub">Gepassioneerd door het bouwen van efficiënte software, geautomatiseerde systemen en data-gedreven oplossingen.</p>
+        <p class="hero-sub">Geslaagd :)</p>
         <div class="hero-buttons">
           <a href="#projecten" class="btn-primary" id="projBtn">Bekijk projecten</a>
           <a href="https://github.com/KaasRijkeTurk" target="_blank" class="btn-ghost">
@@ -153,10 +153,10 @@
           <span class="panel-corner">◢</span>
         </div>
         <div class="over-inner">
-          <p class="over-bio">18 jaar. Recent afgestudeerd. Ik focus op het bouwen van robuuste mods, webapplicaties en scripts om complexe processen te automatiseren en <span class="accent">waardevolle technische ervaring</span> op te doen.</p>
+          <p class="over-bio">18 jaar. UITSLAG KOMT. Ik bouw mods, sites en scripts voor <span class="accent">ervaring</span> en <span class="accent">connecties</span>.</p>
           <div class="over-stats">
-            <div class="stat-chip"><span class="chip-key">STATUS</span><span class="chip-val">Opleiding Succesvol Afgerond</span></div>
-            <div class="stat-chip"><span class="chip-key">FOCUS</span><span class="chip-val">Software Development & AI Integratie</span></div>
+            <div class="stat-chip"><span class="chip-key">SCHOOL</span><span class="chip-val">De school met de glazen toilet deurtjes.</span></div>
+            <div class="stat-chip"><span class="chip-key">STUDIE</span><span class="chip-val">Geslaagd, YIPIEEE</span></div>
             <div class="stat-chip"><span class="chip-key">TAAL</span><span class="chip-val">NL · TR · EN</span></div>
           </div>
         </div>
@@ -210,7 +210,7 @@
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             </a>
           </div>
-          <p>Educatieve content-mod voor Minecraft die nieuwe blokken en items introduceert, gericht op architectuur en geschiedenis.</p>
+          <p>Islamitisch geïnspireerde items & blokken in Minecraft. Leert spelers over de Islam en zijn geschiedenis.</p>
           <div class="proj-tags"><span class="tag sm">Java</span><span class="tag sm">Fabric</span><span class="tag sm">Minecraft</span></div>
         </article>
 
@@ -225,7 +225,7 @@
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             </a>
           </div>
-          <p>Gameplay uitbreiding door middel van custom data-driven systemen en het implementeren van nieuwe in-game mechanics.</p>
+          <p>Nieuwe edelstenen, mobs & structuren. Gems geven unieke abilities via de Smithing Table.</p>
           <div class="proj-tags"><span class="tag sm">Java</span><span class="tag sm">Fabric</span><span class="tag sm">Minecraft</span></div>
         </article>
 
@@ -246,8 +246,8 @@
               </a>
             </div>
           </div>
-          <p>Een experimenteel webontwikkelingsproject gericht op frontend architectuur, DOM-manipulatie en UI/UX iteratie.</p>
-          <div class="proj-tags"><span class="tag sm">HTML</span><span class="tag sm">CSS</span><span class="tag sm">JS</span><span class="tag sm">Frontend</span></div>
+          <p>Bezoek de website astublieft niet.</p>
+          <div class="proj-tags"><span class="tag sm">HTML</span><span class="tag sm">CSS</span><span class="tag sm">JS</span><span class="tag sm">67% Anorganisch</span></div>
         </article>
 
           <article class="proj-card">
@@ -265,8 +265,8 @@
               </a>
             </div>
           </div>
-          <p>Discord AI-bot voor serverbeheer geïntegreerd met Ollama (llama3.2). Gehost in een lokale omgeving ter besparing van API-kosten.</p>
-          <div class="proj-tags"><span class="tag sm">Node.js</span><span class="tag sm">JS</span><span class="tag sm">Ollama</span><span class="tag sm">Discord.js</span></div>
+          <p>Discord AI-bot voor MC serverbeheer via Ollama (llama3.2). Lokaal, geen API-kosten.</p>
+          <div class="proj-tags"><span class="tag sm">Microslop Support</span><span class="tag sm">JS</span><span class="tag sm">Ollama</span><span class="tag sm">Discord</span></div>
         </article>
         
 <article class="proj-card">
@@ -278,7 +278,7 @@
     </div>
     <span class="wip-badge soon">SOON</span>
   </div>
-  <p>Discord Command-bot voor het dynamisch sorteren en categoriseren van YouTube-afspeellijsten via lokale LLM-verwerking (Ollama llama3.1:8b).</p>
+  <p>Discord Command-bot voor het sorteren van YouTube-afspeellijsten i.f.v. categorisering van video's via Ollama (llama3.1:8b). Volledig lokaal, dus geen API-kosten.</p>
   <div class="proj-tags">
     <span class="tag sm">Python</span>
     <span class="tag sm">Discord.py</span>
@@ -304,7 +304,7 @@
             <span class="server-badge">NeoForge 1.21.1</span>
           </div>
           <p class="server-description">
-            Een op maat geconfigureerde server, volledig beheerd en gemodereerd door een in-house ontwikkelde AI Support Bot. Biedt geautomatiseerd beheer en snelle Discord-integratie.
+            Dit is een op maat gemaakte Minecraft server die volledig wordt beheerd door de geavanceerde AI <strong>Microslop Support Bot</strong>. Automatisch beheer, snelle interacties en direct verbonden met Discord.
           </p>
           
           <div class="download-container">
@@ -315,7 +315,7 @@
               </svg>
               <div class="btn-text">
                 <span class="btn-title">Download mrpack</span>
-                <span class="btn-subtext">Direct inlaadbaar via Modrinth of CurseForge</span>
+                <span class="btn-subtext">Klik om direct te installeren via Modrinth/CurseForge</span>
               </div>
             </a>
           </div>
@@ -333,28 +333,40 @@
           <div class="terminal-body font-mono">
             
             <div class="cmd-section">
-              <div class="cmd-header">── utility commands ──</div>
-              <div class="cmd-line"><span class="cmd">.help</span> — toont alle beschikbare parameters</div>
-              <div class="cmd-line"><span class="cmd">.uptime</span> — actieve server responstijd</div>
-              <div class="cmd-line"><span class="cmd">.purge [1-100 / all] [ww]</span> — database en chat opschoning</div>
-              <div class="cmd-line"><span class="cmd">.poll [vraag] | [opt1] | [opt2]</span> — genereer dynamische data-polls</div>
-              <div class="cmd-line"><span class="cmd">.userinfo [@user]</span> — fetch metadata van gespecificeerde client</div>
-              <div class="cmd-line"><span class="cmd">.serverinfo</span> — output server metrics en statistieken</div>
+              <div class="cmd-header">── algemeen ──</div>
+              <div class="cmd-line"><span class="cmd">.help</span> — laat dit zien</div>
+              <div class="cmd-line"><span class="cmd">.uptime</span> — hoe lang de bot draait</div>
+              <div class="cmd-line"><span class="cmd">.purge [1-100 / all] [ww]</span> — verwijder berichten</div>
+              <div class="cmd-line"><span class="cmd">.roast @user</span> — roast iemand</div>
+              <div class="cmd-line"><span class="cmd">.poll [vraag] | [opt1] | [opt2]</span> — stemming</div>
+              <div class="cmd-line"><span class="cmd">.coinflip</span> — kop of munt</div>
+              <div class="cmd-line"><span class="cmd">.mock [tekst]</span> — SpOnGeBoB tekst</div>
+              <div class="cmd-line"><span class="cmd">.ship @a @b</span> — compatibiliteit</div>
+              <div class="cmd-line"><span class="cmd">.userinfo [@user]</span> — gebruikersinfo</div>
+              <div class="cmd-line"><span class="cmd">.serverinfo</span> — discord server info</div>
+              <div class="cmd-line"><span class="cmd">.freechat</span> — toggle free-chat voor dit kanaal</div>
             </div>
 
             <div class="cmd-section">
               <div class="cmd-header">── server beheer ──</div>
-              <div class="cmd-line"><span class="cmd">.setup [ww]</span> — automatische initialisatie (kanalen, rollen, perms)</div>
-              <div class="cmd-line"><span class="cmd">.setwelcome #kanaal</span> — bind webhook aan specifiek kanaal</div>
-              <div class="cmd-line"><span class="cmd">.setautorole @rol</span> — configureer on-join role assignments</div>
+              <div class="cmd-line"><span class="cmd">.setup [ww]</span> — zet de hele server op (kanalen, rollen, regels)</div>
+              <div class="cmd-line"><span class="cmd">.setwelcome #kanaal</span> — stel het welkomstkanaal in</div>
+              <div class="cmd-line"><span class="cmd">.setautorole @rol</span> — stel de auto-rol in bij joinen</div>
+              <div class="cmd-line"><span class="cmd">.setwelcomemsg [bericht]</span> — pas het welkomstbericht aan ({user} = ping)</div>
             </div>
 
             <div class="cmd-section">
-              <div class="cmd-header">── minecraft integratie ──</div>
-              <div class="cmd-line"><span class="cmd">.mcstatus</span> — ping de server API voor actuele data</div>
-              <div class="cmd-line"><span class="cmd">.mcplayers</span> — lijst van geverifieerde actieve sessies</div>
-              <div class="cmd-line"><span class="cmd">.mcinfo</span> — uitgebreide server en backend logs</div>
-              <div class="cmd-line"><span class="cmd">.mcrcon [commando] [ww]</span> — execute RCON commando op afstand</div>
+              <div class="cmd-header">── minecraft ──</div>
+              <div class="cmd-line"><span class="cmd">.mchelp</span> — alle minecraft commando's</div>
+              <div class="cmd-line"><span class="cmd">.mcstatus</span> — online/offline + speleraantal</div>
+              <div class="cmd-line"><span class="cmd">.mcplayers</span> — wie is er nu online</div>
+              <div class="cmd-line"><span class="cmd">.mcmods</span> — geïnstalleerde mods</div>
+              <div class="cmd-line"><span class="cmd">.mcjoin</span> — hoe te joinen (IP, poort, versie, mods)</div>
+              <div class="cmd-line"><span class="cmd">.mcinfo</span> — volledige server info</div>
+              <div class="cmd-line"><span class="cmd">.mcwhitelist</span> — whitelist</div>
+              <div class="cmd-line"><span class="cmd">.mcbanned</span> — gebande spelers</div>
+              <div class="cmd-line"><span class="cmd">.mcops</span> — operators/admins</div>
+              <div class="cmd-line"><span class="cmd">.mcrcon [commando] [ww]</span> — stuur RCON commando</div>
             </div>
 
           </div>
@@ -367,14 +379,16 @@
 
   <footer class="contact-bar" id="contact">
     <span class="contact-label">contact<span class="accent">:</span></span>
-    <a href="mailto:tothinkornottothink@hotmail.com">Schiphol011@outlook.com</a>
+    <a href="mailto:tothinkornottothink@hotmail.com">tothinkornottothink@hotmail.com</a>
     <span class="bar-sep">|</span>
     <a href="https://github.com/KaasRijkeTurk" target="_blank">github</a>
     <span class="bar-sep">|</span>
     <a href="https://www.youtube.com/@DawahSimplified" target="_blank">youtube</a>
     <span class="bar-sep">|</span>
-    <a href="https://www.tiktok.com/@kaasrijketurk" target="_blank">tiktok</a>
+    <a href="https://www.tiktok.com/@datametmert" target="_blank">tiktok</a>
     <span class="bar-sep">|</span>
+    <a href="https://nl.fiverr.com/datawithmert" target="_blank">fiverr</a>
+    <span class="bar-copy">© 2026 Mert Can</span>
   </footer>
 <div class="side-game left-game">
   <canvas id="pong-left"></canvas>

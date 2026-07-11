@@ -1220,14 +1220,31 @@ nav ul {
   }
 
   /* Toon de version-switcher op mobiel, maar compacter */
-  .version-switcher {
-    display: flex;
-  }
+.version-switcher {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 190px;
+  height: 2rem;
+  padding: -1px 0.3rem;
+}
 
-  .version-switcher .v-btn {
-    padding: 0.12rem 0.25rem;
-    font-size: 0.5rem;
-  }
+.version-switcher .v-btn {
+  padding: 0.15rem 0.35rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-size: 0.55rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  border-radius: 190px;
+  white-space: nowrap;
+}
+
 
   .zoom-btn {
     width: 20px;
